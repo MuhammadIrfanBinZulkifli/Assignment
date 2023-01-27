@@ -1,3 +1,13 @@
+// *********************************************************
+// Course: TCP1101 PROGRAMMING FUNDAMENTALS
+// Year: Trimester 1, 2022/23 (T2215)
+// Lab: TT8L
+// Names: RAJA FITRI HAZIQ BIN RAJA MOHD FUAD | MUHAMMAD IRFAN BIN ZULKIFLI   |
+// IDs:                            1211101242 | 1211103094                    | 
+// Emails:      1211101242@student.mmu.edu.my | 1211103094@student.mmu.edu.my | 
+// Phones:                         0132720692 | 0194313650                    | 
+// *********************************************************
+
 #include <iostream>
 #include <cstdlib>
 #include <stdlib.h>
@@ -7,7 +17,6 @@
 #include <vector>
 #include <iomanip>
 using namespace std;
-
 
 class MakingTable 
 {
@@ -190,19 +199,124 @@ class MakingTable
 
         alienPlacement(table, x, y);
         zombiePlacement(table, x, y, z);
+        tablePrinting(table, y);
     }
 };
 
-
 int main()
 {
-    int rowNum, colNum, zombiesNum;
-    cout << "Enter row number     => "; cin >> rowNum;
-    cout << "Enter column number  => "; cin >> colNum;
-    cout << "Enter zombies number => "; cin >> zombiesNum;
+    int rowNum = 9, colNum = 21, zombiesNum = 9; // Default values for the number of row, column and zombies
+    char playerChoice;                           // Define the variable for player's choice to change the default values 
+    bool gameSettings = true;                    // Define the variable for gameSettings for loop purposes
 
-    MakingTable gameBoard(rowNum, colNum, zombiesNum);
-    gameBoard.tablePrinting(gameBoard.table, colNum);
+    while (gameSettings)
+    {
+        // Display default values before printing the Game Board
+        system("CLS");
+        cout << " Game Board Settings " << endl;
+        cout << " +-+-+-+-+-+-+-+-+-+ " << endl;
+        cout << " Row => " << rowNum << endl;
+        cout << " Column => " << colNum << endl;
+        cout << " Zombies => " << zombiesNum << endl;
+        cout << " +-+-+-+-+-+-+-+-+-+ " << endl;
+        
+        // Ask the player if he/she wants to change the default values
+        cout << " Do you want to change the default values? (y/n) => "; cin >> playerChoice;
 
-    system("PAUSE");
+        // If statement if player decides to change the default value
+        if (playerChoice == 'Y' || playerChoice == 'y')
+        {
+            gameSettings = false;                           // Ignore gameSettings
+            int rowNum = 0, colNum = 0, zombiesNum = 0;     // Resets default values to 0
+            char playerChoice;                              // Define the variable for player's choice
+            bool resetSettings = true; // Define the variable for newSettings and resetStatement for loop purposes
+
+            while (resetSettings)
+            {
+                // Ask the player to type in new values for row, column and zombies
+                system("CLS");
+                cout << " Enter a new value for row => ";
+                cin >> rowNum;
+                cout << " Enter a new value for column => ";
+                cin >> colNum;
+                cout << " Enter a new value for zombies => ";
+                cin >> zombiesNum;
+
+                if (rowNum > 9 || rowNum < 3)
+                {
+                    cout << " Reminder: Minimum number of row is 3 and maximum number of row is 9" << endl;
+                    system("PAUSE");
+                    resetSettings = true;
+                }
+                else if (colNum > 21 || colNum < 3)
+                {
+                    cout << " Reminder: Minimum number of column is 3 and maximum number of column is 21" << endl;
+                    system("PAUSE");
+                    resetSettings = true;
+                }
+                else if (zombiesNum > 9 || zombiesNum < 1)
+                {
+                    cout << " Reminder: Minimum number of zombies is 1 and maximum number of column is 9" << endl;
+                    system("PAUSE");
+                    resetSettings = true;
+                }
+                else
+                {
+                    // Prints out the new updated value from previous statement
+                    system("CLS");
+                    cout << " Game Board Settings " << endl;
+                    cout << " +-+-+-+-+-+-+-+-+-+ " << endl;
+                    cout << " Row => " << rowNum << endl;
+                    cout << " Column => " << colNum << endl;
+                    cout << " Zombies => " << zombiesNum << endl;
+                    cout << " +-+-+-+-+-+-+-+-+-+ " << endl;
+
+                    // Ask whether or not the player wants to continue with the updated value or resets it
+                    cout << " C to continue/R to reset " << endl;
+                    cout << " Continue? (c/r)=> ";
+                    cin >> playerChoice;
+
+                    // If statement if the player wants to continue
+                    if (playerChoice == 'C' || playerChoice == 'c')
+                    {
+                        resetSettings = false; // Ignore resetSettings
+                        gameSettings = false;  // Ignore gameSettings
+
+                        system("CLS");
+                        MakingTable(rowNum, colNum, zombiesNum);
+                        system("PAUSE");
+                    }
+                    // Else if statement if the player wants to reset
+                    else if (playerChoice == 'r' || playerChoice == 'R')
+                    {
+                        resetSettings = true; // Return newSettings
+                        gameSettings = false; // Ignore gameSettings
+                    }
+                    // Else statement if the player inputs in neither C or R
+                    else
+                    {
+                        cout << " Invalid input! Please try again..." << endl;
+                        system("PAUSE");
+                        resetSettings = true; // Ignore newSettings
+                        gameSettings = false; // Ignore gameSettings
+                    }
+                }
+            }
+        }
+        // Else if statement if the player doesn't want to change the value
+        else if (playerChoice == 'N' || playerChoice == 'n')
+        {
+            gameSettings = false; // Ignore gameSettings
+
+            system("CLS");
+            MakingTable(rowNum, colNum, zombiesNum);
+            system("PAUSE");
+        }
+        else
+        {
+            cout << " Invalid input! Please try again... " << endl;
+            system("PAUSE");
+            gameSettings = true; // Return gameSettings
+        }
+    }
 }
