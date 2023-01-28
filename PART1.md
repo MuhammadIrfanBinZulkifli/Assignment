@@ -47,7 +47,7 @@ For example:
 
 ### Muhammad Irfan Bin Zulkifli (1211103094)
 
-1. Implemented the feature where the program is able to create a 2-dimensional array using class functions based on the default values or the updated values while randomly generating game attributes such as game objects, zombies and alien.
+1. Implemented the feature where the program is able to create a 1-dimensional array using class functions based on the default values or the updated values while randomly generating game attributes such as game objects, zombies and alien.
 2. Implemented the feature where the program can clear the screen and prints out the next  output at the same screen by using the "cstdlib" functions.
 
 ## Problems Encountered & Solutions
