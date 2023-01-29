@@ -32,7 +32,7 @@ List all the features not yet done. Remove this section if there is no incomplet
 
 Describe the additional features that has been implemented.
 
-<No additional features have been added>
+1. A simple Main Menu has been implemented to make the game flow smoother.
 
 ## Contributions
 
@@ -44,11 +44,14 @@ For example:
 
 1. Implemented the feature where the user can either use the default values or update a new value before printing out the game board. (The values have been restricted to certain conditions to meet the game requirement)
 2. Implemented the feature where the program can clear the screen and prints out the next  output at the same screen by using the "cstdlib" functions.
+3. Write the documentation.
 
 ### Muhammad Irfan Bin Zulkifli (1211103094)
 
 1. Implemented the feature where the program is able to create a 1-dimensional array using class functions based on the default values or the updated values while randomly generating game attributes such as game objects, zombies and alien.
-2. Implemented the feature where the program can clear the screen and prints out the next  output at the same screen by using the "cstdlib" functions.
+2. Implemented a new class to display the alien and zombies attributes.
+3. Organized the code to make the readability better.
+4. Implemented the feature where the program can clear the screen and prints out the next  output at the same screen by using the "cstdlib" functions.
 
 ## Problems Encountered & Solutions
 
