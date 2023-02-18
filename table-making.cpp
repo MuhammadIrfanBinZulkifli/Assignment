@@ -17,101 +17,110 @@ char MakingTable::objectGenerator()
     return finalObject;
 }
 
-int MakingTable::randomCoordinateForZombies(const int x, const int y)
-{
-    int rowSkip = y * 2 + 1;
-    int randomCol = 0; int randomRow = 0;
-    while (randomCol % 2 == 0)
-    {
-        randomCol = rand() % (y * 2 + 1);
-    }
-
-    // create random row numbers
-    while (randomRow % 2 == 0)
-    {
-        randomRow = rand() % (x * 2 + 1);
-    }
-
-    return randomCol + (rowSkip * randomRow);
-}
-
-void MakingTable::alienPlacement(vector<char>& table, const int x, const int y)
-{
-    for (int i = 0; i < table.size(); ++i)
-    {
-        if (i == ((x * 2 + 1) * y ) + x)
-        {
-            table[i] = 'A';
-        }
-    }
-}
-
-void MakingTable::zombiePlacement(vector<char>& table, const int x, const int y, const int z)
+void MakingTable::zombiePlacement(vector<vector<char>>& table, const int x, const int y, const int z)
 {
     char zombiesTroop[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-    int tempRowNum = x;
-    int tempColNum = y;
-    int randomCoordinate = 0;
-
-    randomCoordinate = randomCoordinateForZombies(tempRowNum, tempColNum);
-    vector<int> tempRandomCoordinate;
-    tempRandomCoordinate.push_back(randomCoordinate);
-
+    int randomCoordinateRow, randomCoordinateCol;
+    randomCoordinateRow = rand() % x;
+    randomCoordinateCol = rand() % y;
+    vector<int> tempX; tempX.push_back(randomCoordinateRow);
+    vector<int> tempY; tempY.push_back(randomCoordinateCol);
     int zombiesCount = 0;
     while (zombiesCount < z)
     {
         int flag = 1;
-        randomCoordinate = randomCoordinateForZombies(tempRowNum, tempColNum);
+        randomCoordinateRow = rand() % x;
+        randomCoordinateCol = rand() % y;
 
-        //check if the coordinate is used before
-        for (int i = 0; i < tempRandomCoordinate.size(); ++i)
+        for (int i = 0; i < tempX.size(); ++i)
         {
-            if (tempRandomCoordinate[i] == randomCoordinate)
+            if (randomCoordinateRow == tempX[i] && randomCoordinateCol == tempY[i])
             {
                 flag = 0;
             }
         }
+        
         if (flag == 1)
         {
-
-            if (table[randomCoordinate] != 'A')
+            if (table[randomCoordinateRow][randomCoordinateCol] != 'A')
             {
                 //randomCoordinate = randomCoordinateForZombies(tempRowNum, tempColNum);
-                table[randomCoordinate] = zombiesTroop[zombiesCount];
-                tempRandomCoordinate.push_back(randomCoordinate);
+                table[randomCoordinateRow][randomCoordinateCol] = zombiesTroop[zombiesCount];
+                vector<int> inCoordinate;
+                tempX.push_back(randomCoordinateRow);
+                tempY.push_back(randomCoordinateCol);
                 zombiesCount = zombiesCount + 1;
             }
         }
     }
 }
 
-void MakingTable::tablePrinting(vector<char>& table, const int y)
+void MakingTable::zombiesStats(const int x, const int y, const int z)
 {
-    int rowCount = 1;
-    int colCount = 1;
-    int rowMark = 1;
-
-    for (int i = 0; i < table.size(); i++)
+    for (int i = 1; i <= z; i++)
     {
-        if (i == (y * 2 + 1) * rowMark)
+        vector<int> inStats;
+        for (int j = 0; j < 3; j++)
         {
-            ++rowMark;
-            cout << endl;
-            cout << table.at(i);
+            int life, attack, range, smallest;
+            if (x < y)
+                smallest = x;
+            else
+                smallest = y;
+
+            if (j == 0)
+            {
+
+                do
+                {
+                    life = rand() % 200 + 100;
+                } while (life % 10 != 0);
+                inStats.push_back(life);
+
+            }
+            else if (j == 1)
+            {
+
+                do
+                {
+                    attack = rand() % 70 + 30;
+                } while (attack % 10 != 0);
+                inStats.push_back(attack);
+                
+            }
+            else
+            {
+                do
+                {
+                    range = rand() % smallest;
+                } while (range == 0);
+                inStats.push_back(range);
+            }
         }
-        else if (rowMark % 2 == 0 && i == (y * 2 * rowMark) + (rowMark - 1))
-        {
-            cout << table.at(i);
-            cout << right << setw(3);
-            cout << rowCount;
-            ++rowCount;
-        }
-        else
-        {
-            cout << table.at(i);
-        }
+        allZombiesStats.push_back(inStats);
     }
-    cout << endl;
+}
+
+void MakingTable::tablePrinting(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, const int x, const int y, const int z)
+{
+    for (int j = 0; j < y; ++j)
+    {
+        cout << "+-";
+    }
+    cout << '+' << endl;
+    for (int i = 0; i < table.size();++i)
+    {
+        for (int j = 0; j < y; ++j)
+        {
+            cout << '|'; cout << table[i][j];
+        }
+        cout << '|' << setw(3) << i + 1 << endl;
+        for (int k = 0; k < y; ++k)
+        {
+            cout << "+-";
+        }
+        cout << '+' << endl;
+    }
     for (int j = 0; j < y; ++j)
     {
         int digit = (j + 1) / 10;
@@ -132,50 +141,29 @@ void MakingTable::tablePrinting(vector<char>& table, const int y)
     }
     cout << endl
         << endl;
+    cout << endl;
+
+    cout << "Alien     :" << " Life " << alienStats[0] << " , " << " Attack " << alienStats[1] << endl;
+    for (int i = 0; i < z; i++)
+    {
+        cout << "Zombie " << i + 1 << "  :" << " Life " << allZombiesStats[i][0] << " , " << " Attack " << allZombiesStats[i][1] << " , " << " Range " << allZombiesStats[i][2] << endl;
+    }
 }
 
 MakingTable::MakingTable(int x, int y, int z)
 {
-    char horiBorder[2] = {'+', '-'};
-    char vertiBorder[2] = {'|', ' '};
-    int zombiesCount = 0;
-
-    // row looping
-    for(int rowCount = 0; rowCount < x * 2 + 1; ++rowCount)
+    for (int i = 0; i < x; ++i)
     {
-
-        if (rowCount % 2 == 0)
+        vector<char> inObjects;
+        for (int j = 0; j < y; ++j)
         {
-            for (int colCount = 0; colCount < y * 2 + 1; ++colCount)
-            {
-                if (colCount % 2 == 0)
-                {
-                    table.push_back(horiBorder[0]);
-                }
-                else
-                {
-                    table.push_back(horiBorder[1]);
-                }
-            }
+            char obj = objectGenerator();
+            inObjects.push_back(obj);
         }
-        else
-        {
-            for (int colCount = 0; colCount < y * 2 + 1; ++colCount)
-            {
-                if (colCount % 2 == 0)
-                {
-                    table.push_back(vertiBorder[0]);
-                }
-                else //print object
-                {
-                    vertiBorder[1] = objectGenerator();
-                    table.push_back(vertiBorder[1]);
-                }
-            }
-        }
+        table.push_back(inObjects);
     }
-
-    alienPlacement(table, x, y);
+    table[x/2][y/2] = 'A';
+    // alienPlacement(table, x, y);
     zombiePlacement(table, x, y, z);
-    tablePrinting(table, y);
+    zombiesStats(x, y, z);
 }
