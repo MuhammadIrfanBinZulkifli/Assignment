@@ -1655,34 +1655,6 @@ void saveGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vecto
     system("PAUSE"); 
 }
 
-// A void function to load the saved game
-void loadGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, const int x, const int y, const int z)
-{
-    string fileName, line;
-    cout << "Type in the saved file's name => ";
-    cin >> fileName;
-
-    system("CLS");
-    ifstream file;
-    file.open(fileName);
-
-    if (file.is_open())
-    {
-        while (getline(file, line))
-        {
-            cout << line << endl;
-        }
-        file.close();
-        system("PAUSE");
-    }
-    else
-    {
-        cout << "File doesn't exists" << endl;
-        system("PAUSE");
-    }
-    system("PAUSE");
-}
-
 void gameMainMenu() // Void function for Alien Vs Zombies Main Menu
 {
     // Game Menu for Alien Vs Zombies
@@ -2478,15 +2450,12 @@ int main()
             {
                 // retrieve rowNum
                 fileOpen >> rowNum;
-                cout << "row => " << rowNum << endl;
 
                 // retrieve colNum
                 fileOpen >> colNum;
-                cout << "col => " << colNum << endl;
 
                 // retrieve zombiesNum
                 fileOpen >> zombiesNum;
-                cout << "zombies => " << zombiesNum << endl;
 
                 // retrieve alienStats
                 int intAlienHealth;
@@ -2495,7 +2464,6 @@ int main()
                 fileOpen >> intAlienAttack;
                 alienStats.push_back(intAlienHealth);
                 alienStats.push_back(intAlienAttack);
-                cout << alienStats.size() << endl;
 
                 // retrieve zombies stats
                 for (int i = 0; i < zombiesNum; ++i)
@@ -2509,7 +2477,6 @@ int main()
                     }
                     allZombiesStats.push_back(inZomStats);
                 }
-                cout << allZombiesStats.size() << endl;
 
                 // retrieve turn
                 for (int i = 0; i < zombiesNum + 1; ++i)
@@ -2518,7 +2485,6 @@ int main()
                     fileOpen >> attTurn;
                     turn.push_back(attTurn);
                 }
-                cout << turn.size() << endl;
 
                 // retrieve the table information into string variable string line
                 int currLine = 0;
@@ -2608,17 +2574,13 @@ int main()
                             {
                                 cout << endl;
                                 cout << "============================================= " << endl;
-                                cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- load = Load a saved game from a file\n- quit = Quit the game " << endl;
+                                cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- quit = Quit the game " << endl;
                                 cout << "============================================= " << endl;
                                 system("PAUSE");
                             }
                             else if (option.compare("save") == 0)
                             {
                                 saveGame(table, alienStats, allZombiesStats, turn, rowNum, colNum, zombiesNum);
-                            }
-                            else if (option.compare("load") == 0)
-                            {
-                                loadGame(table, alienStats, allZombiesStats, rowNum, colNum, zombiesNum);
                             }
                             else if (option.compare("quit") == 0)
                             {
