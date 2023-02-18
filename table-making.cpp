@@ -4,13 +4,13 @@
 char MakingTable::objectGenerator()
 {
     int index;
-    char theObject[10] = {'h', '^', ' ', 'p', '<', ' ', 'r', ' ', '>', 'v'};
+    char theObject[11] = {'h', '^', ' ', 'p', '<', ' ', 'r', ' ', '>', 'v', 'd'};
     char finalObject;
     for (int i = 0; i < 3; ++i)
     {
         if (i == 1)
         {
-            index = rand() % 10;
+            index = rand() % 11;
             finalObject = theObject[index];
         }
     }
