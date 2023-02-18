@@ -3,15 +3,17 @@
 // Year: Trimester 1, 2022/23 (T2215)
 // Lab: TT8L
 // Names: RAJA FITRI HAZIQ BIN RAJA MOHD FUAD | MUHAMMAD IRFAN BIN ZULKIFLI   |
-// IDs:                            1211101242 | 1211103094                    | 
-// Emails:      1211101242@student.mmu.edu.my | 1211103094@student.mmu.edu.my | 
-// Phones:                         0132720692 | 0194313650                    | 
+// IDs:                            1211101242 | 1211103094                    |
+// Emails:      1211101242@student.mmu.edu.my | 1211103094@student.mmu.edu.my |
+// Phones:                         0132720692 | 0194313650                    |
 // *********************************************************
 
-#include "table-making.hpp"
+#include "table-making.hpp" // Include everything inside a hpp file called "table-making"
 
-void tablePrinting(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, const int x, const int y, const int z)
+// A void function to print the Game Board
+void tablePrinting(vector<vector<char>> &table, vector<int> &alienStats, vector<vector<int>> &allZombiesStats, const int x, const int y, const int z)
 {
+    // Program starts printing the Game Board based on the row, column and zombies numbers
     cout << "=================================== " << endl;
     cout << "Player! Welcome To Alien Vs Zombies " << endl;
     cout << "=================================== " << endl;
@@ -22,11 +24,12 @@ void tablePrinting(vector<vector<char>>& table, vector<int>& alienStats, vector<
         cout << "+-";
     }
     cout << '+' << endl;
-    for (int i = 0; i < table.size();++i)
+    for (int i = 0; i < table.size(); ++i)
     {
         for (int j = 0; j < y; ++j)
         {
-            cout << '|'; cout << table[i][j];
+            cout << '|';
+            cout << table[i][j];
         }
         cout << '|' << setw(3) << i + 1 << endl;
         for (int k = 0; k < y; ++k)
@@ -42,31 +45,42 @@ void tablePrinting(vector<vector<char>>& table, vector<int>& alienStats, vector<
         if (digit == 0)
         {
             cout << " ";
-        } 
+        }
         else
         {
             cout << digit;
         }
     }
     cout << endl;
-    for (int j = 0; j < y; ++j) 
+    for (int j = 0; j < y; ++j)
     {
         cout << " " << (j + 1) % 10;
     }
 
-    cout << endl << endl;
+    cout << endl
+         << endl;
     cout << endl;
 
-    cout << "Alien     :" << " Life " << alienStats[0] << " , " << " Attack " << alienStats[1] << endl;
+    cout << "Alien     :"
+         << " Life " << alienStats[0] << " , "
+         << " Attack " << alienStats[1] << endl;
     for (int i = 0; i < z; i++)
     {
-        cout << "Zombie " << i + 1 << "  :" << " Life " << allZombiesStats[i][0] << " , " << " Attack " << allZombiesStats[i][1] << " , " << " Range " << allZombiesStats[i][2] << endl;
+        cout << "Zombie " << i + 1 << "  :"
+             << " Life " << allZombiesStats[i][0] << " , "
+             << " Attack " << allZombiesStats[i][1] << " , "
+             << " Range " << allZombiesStats[i][2] << endl;
     }
+    // Program stops printing out the Game Board based on the row, column and zombies number
 }
 
-int rowCoordinate(vector<vector<char>>& table, const int y)
+// An int function to identify the number of rows to insert Alien in the middle of the Game Board
+int rowCoordinate(vector<vector<char>> &table, const int y)
 {
+    // Defining a variable called row with "int"
     int row;
+
+    // Program starts going through for loop to identify the middle and of the Game Board and insert Alien
     for (int i = 0; i < table.size(); ++i)
     {
         for (int j = 0; j < y; ++j)
@@ -78,11 +92,16 @@ int rowCoordinate(vector<vector<char>>& table, const int y)
         }
     }
     return row;
+    // Program stops going through for loop to identify the middle and of the Game Board and insert Alien
 }
 
-int colCoordinate(vector<vector<char>>& table, const int y)
+// An int function to identify the number of column being printed based on the players' choices
+int colCoordinate(vector<vector<char>> &table, const int y)
 {
+    // Defining a variable called col with "int"
     int col;
+
+    // Program starts going through for loop to identify the middle and of the Game Board and insert Alien
     for (int i = 0; i < table.size(); ++i)
     {
         for (int j = 0; j < y; ++j)
@@ -94,193 +113,226 @@ int colCoordinate(vector<vector<char>>& table, const int y)
         }
     }
     return col;
+    // Program stops going through for loop to identify the middle and of the Game Board and insert Alien
 }
 
-void changeArrow(vector<vector<char>>& table, int arrRow, int arrCol, string direction)
+// A void function to change the direction of arrows based on the players' choice that are present in the Game Board
+void changeArrow(vector<vector<char>> &table, int arrRow, int arrCol, string direction)
 {
-    if(direction.compare("up") == 0)
+    //An if statement if the player wants to change the direction of the arrow from any direction to up
+    if (direction.compare("up") == 0)
     {
         table[arrRow - 1][arrCol - 1] = '^';
     }
-    else if(direction.compare("down") == 0)
+    //An if statement if the player wants to change the direction of the arrow from any direction to down
+    else if (direction.compare("down") == 0)
     {
         table[arrRow - 1][arrCol - 1] = 'v';
     }
-    else if(direction.compare("left") == 0)
+    //An if statement if the player wants to change the direction of the arrow from any direction to left
+    else if (direction.compare("left") == 0)
     {
         table[arrRow - 1][arrCol - 1] = '<';
     }
-    else if(direction.compare("right") == 0)
+    //An if statement if the player wants to change the direction of the arrow from any direction to right
+    else if (direction.compare("right") == 0)
     {
         table[arrRow - 1][arrCol - 1] = '>';
     }
+
 }
 
-int zombiesRow(vector<vector<char>>& table, char zombChar, const int y)
+// An int function to identify empty row spaces inside the Game Board to insert Zombies
+int zombiesRow(vector<vector<char>> &table, char zombChar, const int y)
 {
+    // Defining a variable called rowZ with "int"
     int rowZ;
-    for(int i = 0; i < table.size(); ++i)
+
+    // Program starts to identify empty row spaces to insert Zombies
+    for (int i = 0; i < table.size(); ++i)
     {
-        for(int j = 0 ; j < y; ++j)
+        for (int j = 0; j < y; ++j)
         {
-            if(table[i][j] == zombChar)
+            if (table[i][j] == zombChar)
             {
                 rowZ = i;
             }
         }
     }
     return rowZ;
+    // Program stops to identify empty row spaces to insert Zombies
 }
 
-int zombiesCol(vector<vector<char>>& table, char zombChar, const int y)
+// An int function to identify empty column spaces inside the Game Board to insert Zombies
+int zombiesCol(vector<vector<char>> &table, char zombChar, const int y)
 {
+    // Defining a variable called colZ with "int"
     int colZ;
-    for(int i = 0; i < table.size(); ++i)
+
+    // Program starts to identify column empty spaces to insert Zombies
+    for (int i = 0; i < table.size(); ++i)
     {
-        for(int j = 0 ; j < y; ++j)
+        for (int j = 0; j < y; ++j)
         {
-            if(table[i][j] == zombChar)
+            if (table[i][j] == zombChar)
             {
                 colZ = j;
             }
         }
     }
     return colZ;
+    // Program starts to identify empty column spaces to insert Zombies
 }
 
-int checkUp(vector<vector<char>>& table, const int rowZ, const int colZ)
-{ 
-    if((table[rowZ - 1][colZ] == 'A') || (table[rowZ - 1][colZ] == '1') || (table[rowZ - 1][colZ] == '2') || (table[rowZ - 1][colZ] == '3') || (table[rowZ - 1][colZ] == '4') || (table[rowZ - 1][colZ] == '5') || (table[rowZ - 1][colZ] == '6') || (table[rowZ - 1][colZ] == '7') || (table[rowZ - 1][colZ] == '8') || (table[rowZ - 1][colZ] == '9'))
+// An int function to check whether or not up is empty before Zombies start moving up
+int checkUp(vector<vector<char>> &table, const int rowZ, const int colZ)
+{
+    // An if statement if the space upward of the zombies is occupied by Alien or Zombies
+    if ((table[rowZ - 1][colZ] == 'A') || (table[rowZ - 1][colZ] == '1') || (table[rowZ - 1][colZ] == '2') || (table[rowZ - 1][colZ] == '3') || (table[rowZ - 1][colZ] == '4') || (table[rowZ - 1][colZ] == '5') || (table[rowZ - 1][colZ] == '6') || (table[rowZ - 1][colZ] == '7') || (table[rowZ - 1][colZ] == '8') || (table[rowZ - 1][colZ] == '9'))
     {
-        return 0; // fail potential movement
+        return 0; 
     }
+    // An else if statement if the space upward of the zombies is not occupied by Alien or Zombies
     else
     {
-        return 1; //success potential movemnet
+        return 1; 
     }
 }
 
-int checkDown(vector<vector<char>>& table, const int rowZ, const int colZ)
+// An int function to check whether or not up is empty before Zombies start moving down
+int checkDown(vector<vector<char>> &table, const int rowZ, const int colZ)
 {
-    if((table[rowZ + 1][colZ] == 'A') || (table[rowZ + 1][colZ] == '1') || (table[rowZ + 1][colZ] == '2') || (table[rowZ + 1][colZ] == '3') || (table[rowZ + 1][colZ] == '4') || (table[rowZ + 1][colZ] == '5') || (table[rowZ + 1][colZ] == '6') || (table[rowZ + 1][colZ] == '7') || (table[rowZ + 1][colZ] == '8') || (table[rowZ + 1][colZ] == '9'))
+    // An if statement if the space downward of the zombies is occupied by Alien or Zombies
+    if ((table[rowZ + 1][colZ] == 'A') || (table[rowZ + 1][colZ] == '1') || (table[rowZ + 1][colZ] == '2') || (table[rowZ + 1][colZ] == '3') || (table[rowZ + 1][colZ] == '4') || (table[rowZ + 1][colZ] == '5') || (table[rowZ + 1][colZ] == '6') || (table[rowZ + 1][colZ] == '7') || (table[rowZ + 1][colZ] == '8') || (table[rowZ + 1][colZ] == '9'))
     {
-        return 0; // fail potential movement
+        return 0; 
     }
+    // An if statement if the space downward of the zombies is not occupied by Alien or Zombies
     else
     {
-        return 1; //success potential movemnet
+        return 1; 
     }
 }
 
-int checkLeft(vector<vector<char>>& table, const int rowZ, const int colZ)
+// An int function to check whether or not up is empty before Zombies start moving left
+int checkLeft(vector<vector<char>> &table, const int rowZ, const int colZ)
 {
-    if((table[rowZ][colZ - 1] == 'A') || (table[rowZ][colZ - 1] == '1') || (table[rowZ][colZ - 1] == '2') || (table[rowZ][colZ - 1] == '3') || (table[rowZ][colZ - 1] == '4') || (table[rowZ][colZ - 1] == '5') || (table[rowZ][colZ - 1] == '6') || (table[rowZ][colZ - 1] == '7') || (table[rowZ][colZ - 1] == '8') || (table[rowZ][colZ - 1] == '9'))
+    // An if statement if the space left of the zombies is occupied by Alien or Zombies
+    if ((table[rowZ][colZ - 1] == 'A') || (table[rowZ][colZ - 1] == '1') || (table[rowZ][colZ - 1] == '2') || (table[rowZ][colZ - 1] == '3') || (table[rowZ][colZ - 1] == '4') || (table[rowZ][colZ - 1] == '5') || (table[rowZ][colZ - 1] == '6') || (table[rowZ][colZ - 1] == '7') || (table[rowZ][colZ - 1] == '8') || (table[rowZ][colZ - 1] == '9'))
     {
-        return 0; // fail potential movement
+        return 0; 
     }
+    // An if statement if the space left of the zombies is not occupied by Alien or Zombies
     else
     {
-        return 1; //success potential movemnet
+        return 1; 
     }
 }
 
-int checkRight(vector<vector<char>>& table, const int rowZ, const int colZ)
+// An int function to check whether or not up is empty before Zombies start moving right
+int checkRight(vector<vector<char>> &table, const int rowZ, const int colZ)
 {
-    if((table[rowZ][colZ + 1] == 'A') || (table[rowZ][colZ + 1] == '1') || (table[rowZ][colZ + 1] == '2') || (table[rowZ][colZ + 1] == '3') || (table[rowZ][colZ + 1] == '4') || (table[rowZ][colZ + 1] == '5') || (table[rowZ][colZ + 1] == '6') || (table[rowZ][colZ + 1] == '7') || (table[rowZ][colZ + 1] == '8') || (table[rowZ][colZ + 1] == '9'))
+    // An if statement if the space right of the zombies is occupied by Alien or Zombies
+    if ((table[rowZ][colZ + 1] == 'A') || (table[rowZ][colZ + 1] == '1') || (table[rowZ][colZ + 1] == '2') || (table[rowZ][colZ + 1] == '3') || (table[rowZ][colZ + 1] == '4') || (table[rowZ][colZ + 1] == '5') || (table[rowZ][colZ + 1] == '6') || (table[rowZ][colZ + 1] == '7') || (table[rowZ][colZ + 1] == '8') || (table[rowZ][colZ + 1] == '9'))
     {
-        return 0; // failmovement
+        return 0; 
     }
+    // An if statement if the space right of the zombies is not occupied by Alien or Zombies
     else
     {
-        return 1; //successmovemnet
+        return 1; 
     }
 }
 
-void podDamage(vector<vector<char>>& table, vector<vector<int>>& allZombiesStats, vector<int>& turn , const int x, const int y, const int z)
+// A void function for in-game attribute called pod to refelct damage to nearby zombies
+void podDamage(vector<vector<char>> &table, vector<vector<int>> &allZombiesStats, vector<int> &turn, const int x, const int y, const int z)
 {
-    int rowA = rowCoordinate(table, y); // row of alien  rowA = 5
-    //cout << rowA << endl; system("PAUSE");
-    int colA = colCoordinate(table, y); // column of alien  colA = 4
-    //cout << colA << endl; system("PAUSE");
-    int nearestIndex;                        // index of nearest zombies
-    int smallValue = 50;
-    int indZombInStats;
-    vector<int> allRange;               // contain the distance of the zombies from the alien
-    vector<vector<int>> zombCoordinate; // contain coordinate of all alive zombies
+    // Defining variables called rowA, colA, nearestIndex, smallValue and indZombInStats with "int",
+    // a variable called allRange with vector<int> (contain the distance of the zombies from the alien)
+    // and a variable called zombCoordinate with vector<vector<int>> (contain the coordinate of all zombies that are still alive)
+    int rowA = rowCoordinate(table, y), colA = colCoordinate(table, y), nearestIndex, smallValue = 50, indZombInStats;
+    vector<int> allRange;               
+    vector<vector<int>> zombCoordinate;
 
-    for(int i = 1; i < turn.size(); ++i) // loop for finding the coordinate of all alive zombies & store it in the zombCoordinate vector // turn = [0,1,2,3,4]
+    // Program starts going through loop to find the coordinate of all zombies that are alive & store it in the vector of zombCoordinate
+    for (int i = 1; i < turn.size(); ++i) 
     {
         vector<int> inCoor;
-        char zombChar = '0' + turn[i]; //zombChar = '1'
-        //cout << zombChar << endl; system("PAUSE");
-        for(int j = 0; j < table.size(); ++j) 
+        char zombChar = '0' + turn[i]; 
+        
+        for (int j = 0; j < table.size(); ++j)
         {
-            for(int k = 0; k < y; ++k)
+            for (int k = 0; k < y; ++k)
             {
-                if(table[j][k] == zombChar) 
+                if (table[j][k] == zombChar)
                 {
-                    int rowZomb = zombiesRow(table, zombChar, y); //cout << rowZomb << endl; system("PAUSE");
-                    int colZomb = zombiesCol(table, zombChar, y); //cout << colZomb << endl; system("PAUSE");
-                    inCoor.push_back(colZomb); inCoor.push_back(rowZomb); // [6,0], [1,1], [3,6], [2,3]
-                    zombCoordinate.push_back(inCoor); // [[6,0], [1,1], [3,6], [2,3]]
+                    int rowZomb = zombiesRow(table, zombChar, y); 
+                    int colZomb = zombiesCol(table, zombChar, y); 
+                    inCoor.push_back(colZomb);
+                    inCoor.push_back(rowZomb);        
+                    zombCoordinate.push_back(inCoor); 
                 }
             }
         }
     }
+    // Program stops going through for loop to find the coordinate of all zombies that are alive & store it in the vector of zombCoordinate
 
-    for(int i = 0; i < zombCoordinate.size(); ++i) // loop for calculate teh column distance between all zombies and the alien
+    // Program starts going through for loop to calculate the column distance between all zombies and the alien itself
+    for (int i = 0; i < zombCoordinate.size(); ++i)
     {
         int tempDis = 0;
-        if(zombCoordinate[i][0] <= colA)
+        if (zombCoordinate[i][0] <= colA)
         {
-            tempDis = colA - zombCoordinate[i][0]; //cout << tempDis << endl; system("PAUSE");
-            allRange.push_back(tempDis); // [4, 3, 2, 1]
-
+            tempDis = colA - zombCoordinate[i][0]; 
+            allRange.push_back(tempDis);          
         }
         else
         {
-            tempDis = zombCoordinate[i][0] - colA; //cout << tempDis << endl; system("PAUSE");
-            allRange.push_back(tempDis); // [4, 3, 2, 1]
+            tempDis = zombCoordinate[i][0] - colA; 
+            allRange.push_back(tempDis);           
         }
     }
+    // Program stops going through for loop to calculate the column distance between all zombies and the alien itself
 
-
-    for(int i = 0; i < allRange.size(); ++i)
+    // Program starts going through for loop to calculate the row distance between all zombies and the alien itself
+    for (int i = 0; i < allRange.size(); ++i)
     {
         int rowDistance = 0;
-        if(zombCoordinate[i][1] <= rowA)
+        if (zombCoordinate[i][1] <= rowA)
         {
-            rowDistance = rowA - zombCoordinate[i][1]; //cout << rowDistance << endl; system("PAUSE");
-            allRange[i] = allRange[i] + rowDistance; //cout << allRange[i] << endl; system("PAUSE");
+            rowDistance = rowA - zombCoordinate[i][1]; 
+            allRange[i] = allRange[i] + rowDistance;   
         }
         else
         {
-            rowDistance = zombCoordinate[i][1] - rowA; //cout << rowDistance << endl; system("PAUSE");
-            allRange[i] = allRange[i] + rowDistance; //cout << allRange[i] << endl; system("PAUSE");
+            rowDistance = zombCoordinate[i][1] - rowA; 
+            allRange[i] = allRange[i] + rowDistance;   
         }
     }
+    // Program stops going through for loop to calculate the row distance between all zombies and the alien itself
 
-    for(int i = 0; i < allRange.size(); ++i) // find the nearest distance of the zombie and alien // allRange = [5, 7, 4, 4]
+    // Program starts going through for loop to find the nearest distance of the zombies and the alien itself
+    for (int i = 0; i < allRange.size(); ++i) 
     {
-        if(allRange[i] < smallValue) // 4 < 5
+        if (allRange[i] < smallValue) 
         {
-            smallValue = allRange[i]; // prevValue = 4
-            // nearest = i; // nearest = 0
+            smallValue = allRange[i]; 
         }
     }
 
-    for(int i = 0; i < allRange.size(); ++i)
+    for (int i = 0; i < allRange.size(); ++i)
     {
-        if(allRange[i] == smallValue)
+        if (allRange[i] == smallValue)
         {
             nearestIndex = i + 1;
             break;
         }
     }
+    // Program stops going through for loop to find the nearest distance of the zombies and the alien itself
 
-    int zombieTurn = turn[nearestIndex] - 1; // turn = [0,1,2,3,4]
+    int zombieTurn = turn[nearestIndex] - 1; 
 
-    if(allZombiesStats[zombieTurn][0] > 10) // zombiestats = [1,2,3]
+    if (allZombiesStats[zombieTurn][0] > 10) 
     {
         allZombiesStats[zombieTurn][0] = allZombiesStats[zombieTurn][0] - 10;
     }
@@ -289,29 +341,25 @@ void podDamage(vector<vector<char>>& table, vector<vector<int>>& allZombiesStats
         allZombiesStats[zombieTurn][0] = 0;
         turn.erase(turn.begin() + nearestIndex);
     }
-
 }
 
-void alienMovement(string option, vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, MakingTable board, const int x, const int y, const int z, vector<int>& turn)
+// A void function for Alien's movement
+void alienMovement(string option, vector<vector<char>> &table, vector<int> &alienStats, vector<vector<int>> &allZombiesStats, MakingTable board, const int x, const int y, const int z, vector<int> &turn)
 {
-    int rowA = rowCoordinate(table, y); // rowA = 3
-    int colA = colCoordinate(table, y); // colA = 2
-    int conds;
-    int messageInd, stopIndicator = 1;
-    int drive = 1, stop = 0, equateX, equateY, prevX, prevY;
+    int rowA = rowCoordinate(table, y), colA = colCoordinate(table, y), conds, messageInd, stopIndicator = 1, drive = 1, stop = 0, equateX, equateY, prevX, prevY;
     char withinA;
-    
-    if(option.compare("up") == 0)
+
+    if (option.compare("up") == 0)
     {
-        drive = rowA;       // drive = 3
-        stop = 0;           
-        equateX = rowA - 1; // equateX = 2
-        equateY = colA;     // equateY = 2
+        drive = rowA; 
+        stop = 0;
+        equateX = rowA - 1; 
+        equateY = colA;     
         prevX = rowA;
         prevY = colA;
         conds = 1;
     }
-    else if(option.compare("down") == 0)
+    else if (option.compare("down") == 0)
     {
         drive = rowA;
         stop = x - 1;
@@ -321,7 +369,7 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
         prevY = colA;
         conds = 2;
     }
-    else if(option.compare("left") == 0)
+    else if (option.compare("left") == 0)
     {
         drive = colA;
         stop = 0;
@@ -331,7 +379,7 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
         prevY = colA;
         conds = 3;
     }
-    else if(option.compare("right") == 0)
+    else if (option.compare("right") == 0)
     {
         drive = colA;
         stop = y - 1;
@@ -343,108 +391,145 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
     }
     else
     {
-        cout << endl << "Invalid input. Please make sure you the input are accurate." << endl;
+        cout << "Invalid input. Please make sure you the input are accurate." << endl;
     }
 
-    while((drive != stop) && (stopIndicator != 0)) // drive = 3, stop = 0, stopindicator = 1
+    while ((drive != stop) && (stopIndicator != 0)) 
     {
         withinA = table[equateX][equateY];
-        if((withinA == '^'))
-        {
-            table[equateX][equateY] = 'A';
-            table[rowA][colA] = '.';
-            alienStats[1] = alienStats[1] + 20;
-            rowA = rowCoordinate(table, y);
-            colA = colCoordinate(table, y);
-            drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA, conds = 1;
-            messageInd = 5;
-        }
-        else if((withinA == 'v'))
-        {
-            table[equateX][equateY] = 'A';
-            table[rowA][colA] = '.';
-            alienStats[1] = alienStats[1] + 20;
-            rowA = rowCoordinate(table, y);
-            colA = colCoordinate(table, y);
-            drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA, conds = 2;
-            messageInd = 5;
 
-        }
-        else if((withinA == '<'))
+        if ((withinA == '^'))
         {
             table[equateX][equateY] = 'A';
             table[rowA][colA] = '.';
             alienStats[1] = alienStats[1] + 20;
             rowA = rowCoordinate(table, y);
             colA = colCoordinate(table, y);
-            drive = colA; stop = 0; equateX = rowA; equateY = colA - 1, conds = 3;
+            drive = rowA;
+            stop = 0;
+            equateX = rowA - 1;
+            equateY = colA, conds = 1;
             messageInd = 5;
-
         }
-        else if((withinA == '>'))
+        else if ((withinA == 'v'))
         {
             table[equateX][equateY] = 'A';
             table[rowA][colA] = '.';
             alienStats[1] = alienStats[1] + 20;
             rowA = rowCoordinate(table, y);
             colA = colCoordinate(table, y);
-            drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1, conds = 4;
+            drive = rowA;
+            stop = x - 1;
+            equateX = rowA + 1;
+            equateY = colA, conds = 2;
             messageInd = 5;
-
         }
-        else if((withinA == 'r'))
+        else if ((withinA == '<'))
         {
-            while(table[equateX][equateY] == 'r')
+            table[equateX][equateY] = 'A';
+            table[rowA][colA] = '.';
+            alienStats[1] = alienStats[1] + 20;
+            rowA = rowCoordinate(table, y);
+            colA = colCoordinate(table, y);
+            drive = colA;
+            stop = 0;
+            equateX = rowA;
+            equateY = colA - 1, conds = 3;
+            messageInd = 5;
+        }
+        else if ((withinA == '>'))
+        {
+            table[equateX][equateY] = 'A';
+            table[rowA][colA] = '.';
+            alienStats[1] = alienStats[1] + 20;
+            rowA = rowCoordinate(table, y);
+            colA = colCoordinate(table, y);
+            drive = colA;
+            stop = y - 1;
+            equateX = rowA;
+            equateY = colA + 1, conds = 4;
+            messageInd = 5;
+        }
+        else if ((withinA == 'r'))
+        {
+            while (table[equateX][equateY] == 'r')
             {
                 table[equateX][equateY] = board.objectGenerator();
             }
+
             messageInd = 1;
             stopIndicator = 0;
             rowA = rowCoordinate(table, y);
             colA = colCoordinate(table, y);
-            if(conds == 1)
+
+            if (conds == 1)
             {
-                drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;
+                drive = rowA;
+                stop = 0;
+                equateX = rowA - 1;
+                equateY = colA;
             }
-            else if(conds == 2)
+            else if (conds == 2)
             {
-                drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                drive = rowA;
+                stop = x - 1;
+                equateX = rowA + 1;
+                equateY = colA;
             }
-            else if(conds == 3)
+            else if (conds == 3)
             {
-                drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                drive = colA;
+                stop = 0;
+                equateX = rowA;
+                equateY = colA - 1;
             }
-            else if(conds == 4)
+            else if (conds == 4)
             {
-                drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;  
+                drive = colA;
+                stop = y - 1;
+                equateX = rowA;
+                equateY = colA + 1;
             }
         }
-        else if((withinA == '1' || withinA == '2' || withinA ==  '3' || withinA ==  '4' || withinA ==  '5' || withinA ==  '6' || withinA ==  '7' || withinA ==  '8' || withinA ==  '9'))
+        else if ((withinA == '1' || withinA == '2' || withinA == '3' || withinA == '4' || withinA == '5' || withinA == '6' || withinA == '7' || withinA == '8' || withinA == '9'))
         {
             int indZombie = withinA - '0' - 1;
             int indZombieTurn = withinA - '0';
+
             if (allZombiesStats[indZombie][0] <= alienStats[1])
             {
                 allZombiesStats[indZombie][0] = 0;
-                table[equateX][equateY] = 'A'; 
+                table[equateX][equateY] = 'A';
                 table[rowA][colA] = '.';
-                rowA = rowCoordinate(table, y); // row = 2
-                colA = colCoordinate(table, y); // col = 2
-                if(conds == 1)
+                rowA = rowCoordinate(table, y); 
+                colA = colCoordinate(table, y); 
+                if (conds == 1)
                 {
-                    drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;
+                    drive = rowA;
+                    stop = 0;
+                    equateX = rowA - 1;
+                    equateY = colA;
                 }
-                else if(conds == 2)
+                else if (conds == 2)
                 {
-                    drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                    drive = rowA;
+                    stop = x - 1;
+                    equateX = rowA + 1;
+                    equateY = colA;
                 }
-                else if(conds == 3)
+                else if (conds == 3)
                 {
-                    drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                    drive = colA;
+                    stop = 0;
+                    equateX = rowA;
+                    equateY = colA - 1;
                 }
-                else if(conds == 4)
+                else if (conds == 4)
                 {
-                    drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;  
+                    drive = colA;
+                    stop = y - 1;
+                    equateX = rowA;
+                    equateY = colA + 1;
                 }
                 for (int i = 0; i < turn.size(); ++i)
                 {
@@ -461,78 +546,118 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
                 messageInd = 2;
                 rowA = rowCoordinate(table, y);
                 colA = colCoordinate(table, y);
-                if(conds == 1)
+
+                if (conds == 1)
                 {
-                    drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;
+                    drive = rowA;
+                    stop = 0;
+                    equateX = rowA - 1;
+                    equateY = colA;
                 }
-                else if(conds == 2)
+                else if (conds == 2)
                 {
-                    drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                    drive = rowA;
+                    stop = x - 1;
+                    equateX = rowA + 1;
+                    equateY = colA;
                 }
-                else if(conds == 3)
+                else if (conds == 3)
                 {
-                    drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                    drive = colA;
+                    stop = 0;
+                    equateX = rowA;
+                    equateY = colA - 1;
                 }
-                else if(conds == 4)
+                else if (conds == 4)
                 {
-                    drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;  
+                    drive = colA;
+                    stop = y - 1;
+                    equateX = rowA;
+                    equateY = colA + 1;
                 }
             }
         }
-        else if((withinA == 'p'))
+        else if ((withinA == 'p'))
         {
             table[equateX][equateY] = 'A';
             table[rowA][colA] = '.';
             rowA = rowCoordinate(table, y);
             colA = colCoordinate(table, y);
             messageInd = 4;
-            podDamage(table, allZombiesStats, turn, x, y, z); // allzombiestats = [[240, 60, 3], [280, 50, 4], [240, 50, 2], [290, 60, 2]] & turn = [0,1,2,3,4]
-            if(conds == 1)
+            podDamage(table, allZombiesStats, turn, x, y, z); 
+
+            if (conds == 1)
             {
-                drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;
+                drive = rowA;
+                stop = 0;
+                equateX = rowA - 1;
+                equateY = colA;
             }
-            else if(conds == 2)
+            else if (conds == 2)
             {
-                drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                drive = rowA;
+                stop = x - 1;
+                equateX = rowA + 1;
+                equateY = colA;
             }
-            else if(conds == 3)
+            else if (conds == 3)
             {
-                drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                drive = colA;
+                stop = 0;
+                equateX = rowA;
+                equateY = colA - 1;
             }
-            else if(conds == 4)
+            else if (conds == 4)
             {
-                drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;  
-            }
-        }
-        else if((withinA == ' '))
-        {
-            table[equateX][equateY] = 'A';   
-            table[rowA][colA] = '.';         
-            rowA = rowCoordinate(table, y);  
-            colA = colCoordinate(table, y);  
-            if(conds == 1)
-            {
-                drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;  // equateX = 1, equateY = 2
-            }
-            else if(conds == 2)
-            {
-                drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
-            }
-            else if(conds == 3)
-            {
-                drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
-            }
-            else if(conds == 4)
-            {
-                drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;   
+                drive = colA;
+                stop = y - 1;
+                equateX = rowA;
+                equateY = colA + 1;
             }
         }
-        else if((withinA == 'h'))
+        else if ((withinA == ' '))
         {
-            table[equateX][equateY] = 'A';   
-            table[rowA][colA] = '.';         
-            rowA = rowCoordinate(table, y);  
-            colA = colCoordinate(table, y);  
+            table[equateX][equateY] = 'A';
+            table[rowA][colA] = '.';
+            rowA = rowCoordinate(table, y);
+            colA = colCoordinate(table, y);
+
+            if (conds == 1)
+            {
+                drive = rowA;
+                stop = 0;
+                equateX = rowA - 1;
+                equateY = colA; 
+            }
+            else if (conds == 2)
+            {
+                drive = rowA;
+                stop = x - 1;
+                equateX = rowA + 1;
+                equateY = colA;
+            }
+            else if (conds == 3)
+            {
+                drive = colA;
+                stop = 0;
+                equateX = rowA;
+                equateY = colA - 1;
+            }
+            else if (conds == 4)
+            {
+                drive = colA;
+                stop = y - 1;
+                equateX = rowA;
+                equateY = colA + 1;
+            }
+        }
+        else if ((withinA == 'h'))
+        {
+            table[equateX][equateY] = 'A';
+            table[rowA][colA] = '.';
+            rowA = rowCoordinate(table, y);
+            colA = colCoordinate(table, y);
+
             if (alienStats[0] < 80)
             {
                 alienStats[0] = alienStats[0] + 20;
@@ -541,22 +666,36 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
             {
                 alienStats[0] = 100;
             }
+
             messageInd = 3;
-            if(conds == 1)
+
+            if (conds == 1)
             {
-                drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;  // equateX = 1, equateY = 2
+                drive = rowA;
+                stop = 0;
+                equateX = rowA - 1;
+                equateY = colA; 
             }
-            else if(conds == 2)
+            else if (conds == 2)
             {
-                drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                drive = rowA;
+                stop = x - 1;
+                equateX = rowA + 1;
+                equateY = colA;
             }
-            else if(conds == 3)
+            else if (conds == 3)
             {
-                drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                drive = colA;
+                stop = 0;
+                equateX = rowA;
+                equateY = colA - 1;
             }
-            else if(conds == 4)
+            else if (conds == 4)
             {
-                drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;   
+                drive = colA;
+                stop = y - 1;
+                equateX = rowA;
+                equateY = colA + 1;
             }
         }
         else
@@ -564,53 +703,71 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
             table[equateX][equateY] = 'A';
             table[rowA][colA] = '.';
             rowA = rowCoordinate(table, y);
-            colA = colCoordinate(table, y); 
-            if(conds == 1)
+            colA = colCoordinate(table, y);
+
+            if (conds == 1)
             {
-                drive = rowA; stop = 0; equateX = rowA - 1; equateY = colA;
+                drive = rowA;
+                stop = 0;
+                equateX = rowA - 1;
+                equateY = colA;
             }
-            else if(conds == 2)
+            else if (conds == 2)
             {
-                drive = rowA; stop = x - 1; equateX = rowA + 1; equateY = colA;
+                drive = rowA;
+                stop = x - 1;
+                equateX = rowA + 1;
+                equateY = colA;
             }
-            else if(conds == 3)
+            else if (conds == 3)
             {
-                drive = colA; stop = 0; equateX = rowA; equateY = colA - 1;
+                drive = colA;
+                stop = 0;
+                equateX = rowA;
+                equateY = colA - 1;
             }
-            else if(conds == 4)
+            else if (conds == 4)
             {
-                drive = colA; stop = y - 1; equateX = rowA; equateY = colA + 1;     
+                drive = colA;
+                stop = y - 1;
+                equateX = rowA;
+                equateY = colA + 1;
             }
         }
+
         system("CLS");
+
         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-        if(messageInd == 1)
+
+        if (messageInd == 1)
         {
             cout << endl << "You have encountered a rock. Your turn has ended." << endl << "Secret objects awaits you....." << endl;
         }
-        else if(messageInd == 2)
+        else if (messageInd == 2)
         {
             cout << endl << "You have encountered a zombie whose life value is higher than your attack value." << endl << "Your turn has ended." << endl;
         }
-        else if(messageInd == 3)
+        else if (messageInd == 3)
         {
             cout << endl << "Congrats!!! You have found a health pack with a value of 20." << endl << "Have a safe journey." << endl;
         }
-        else if(messageInd == 4)
+        else if (messageInd == 4)
         {
             cout << endl << "You encounterd a pod. 10 value of damage is applied to the nearest zombie." << endl;
         }
-        else if(messageInd == 5)
+        else if (messageInd == 5)
         {
             cout << endl << "You endcountered an arrow. Your attack value increase by 20." << endl;
         }
+
         system("PAUSE");
     }
-    for(int i = 0; i < table.size(); ++i)
+
+    for (int i = 0; i < table.size(); ++i)
     {
-        for(int j = 0; j < y; ++j)
+        for (int j = 0; j < y; ++j)
         {
-            if(table[i][j] == '.')
+            if (table[i][j] == '.')
             {
                 table[i][j] = board.objectGenerator();
             }
@@ -619,554 +776,713 @@ void alienMovement(string option, vector<vector<char>>& table, vector<int>& alie
     alienStats[1] = 0;
 }
 
-void zombieMovement(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, int zombTurn, vector<int>& turn, const int x, const int y, const int z)
+// A void function for Zombies' movement
+void zombieMovement(vector<vector<char>> &table, vector<int> &alienStats, vector<vector<int>> &allZombiesStats, int zombTurn, vector<int> &turn, const int x, const int y, const int z)
 {
-    int move = 1;                               // move variable used to complete 2 attacking routine of the zombies
-    int rowA = rowCoordinate(table, y);         // get the row of the Alien
-    int colA = colCoordinate(table, y);         // get the column of the Alien 
-    char zombChar =  '0' + zombTurn;            // get the char of the alien such as '1', '2', ....
-    int zombStatsIndex = zombTurn - 1;
-    int rowZ = zombiesRow(table, zombChar, y);  // get the row of the zombie
-    int colZ = zombiesCol(table, zombChar, y);  // get the col of the zombie
-    while(move < 3)
+    char zombChar = '0' + zombTurn;
+    int move = 1, rowA = rowCoordinate(table, y), colA = colCoordinate(table, y), zombStatsIndex = zombTurn - 1, rowZ = zombiesRow(table, zombChar, y), colZ = zombiesCol(table, zombChar, y); 
+    
+    while (move < 3)
     {
-        if(move == 1)
+        if (move == 1)
         {
-            if(rowZ == 0)
+            if (rowZ == 0)
             {
-                if(colZ == 0)
+                if (colZ == 0)
                 {
-                    //check right & down
-                    int withinRight = checkRight(table, rowZ, colZ);
-                    int withinDown = checkDown(table, rowZ, colZ);
-                    if(withinRight == 1)
+                    int withinRight = checkRight(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ);
+                    
+                    if (withinRight == 1)
                     {
                         table[rowZ][colZ + 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+
                         system("PAUSE");
                     }
-                    else if(withinDown == 1)
+                    else if (withinDown == 1)
                     {
                         table[rowZ + 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
-
                 }
-                else if(colZ == y - 1)
+                else if (colZ == y - 1)
                 {
-                    //check left & down
-                    int withinLeft = checkLeft(table, rowZ, colZ);
-                    int withinDown = checkDown(table, rowZ, colZ);
-                    if(withinLeft == 1)
+                    int withinLeft = checkLeft(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ);
+
+                    if (withinLeft == 1)
                     {
                         table[rowZ][colZ - 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+                        
                         system("PAUSE");
                     }
-                    else if(withinDown == 1)
+                    else if (withinDown == 1)
                     {
                         table[rowZ + 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+                        cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
                 }
                 else
                 {
-                    //check left & right & down
-                    int withinLeft = checkLeft(table, rowZ, colZ);
-                    int withinRight = checkRight(table, rowZ, colZ);
-                    int withinDown = checkDown(table, rowZ, colZ);
-                    if(withinLeft == 1)
+                    int withinLeft = checkLeft(table, rowZ, colZ), withinRight = checkRight(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ);
+                    
+                    if (withinLeft == 1)
                     {
                         table[rowZ][colZ - 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+
                         system("PAUSE");
                     }
-                    else if(withinRight == 1)
+                    else if (withinRight == 1)
                     {
                         table[rowZ][colZ + 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+                        
                         system("PAUSE");
                     }
-                    else if(withinDown == 1)
+                    else if (withinDown == 1)
                     {
                         table[rowZ + 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+                        
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
                 }
             }
-            else if(rowZ == x - 1)
+            else if (rowZ == x - 1)
             {
-                if(colZ == 0)
+                if (colZ == 0)
                 {
-                    //check up & right
-                    int withinUp = checkUp(table, rowZ, colZ);
-                    int withinRight = checkRight(table, rowZ, colZ);
+                    int withinUp = checkUp(table, rowZ, colZ), withinRight = checkRight(table, rowZ, colZ);
+                    
                     if (withinUp == 1)
                     {
                         table[rowZ - 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                        
                         system("PAUSE");
                     }
-                    else if(withinRight == 1)
+                    else if (withinRight == 1)
                     {
                         table[rowZ][colZ + 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+                        
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
                 }
-                else if(colZ == y - 1)
+                else if (colZ == y - 1)
                 {
-                    //check up & left
-                    int withinUp = checkUp(table, rowZ, colZ);
-                    int withinLeft = checkLeft(table, rowZ, colZ);
-                    if(withinUp == 1)
+                    int withinUp = checkUp(table, rowZ, colZ), withinLeft = checkLeft(table, rowZ, colZ);
+                    if (withinUp == 1)
                     {
                         table[rowZ - 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                        
                         system("PAUSE");
                     }
-                    else if(withinLeft == 1)
+                    else if (withinLeft == 1)
                     {
                         table[rowZ][colZ - 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+                        
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
+                        
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
                 }
                 else
                 {
-                    //check left & right & up
-                    int withinLeft = checkLeft(table, rowZ, colZ);
-                    int withinRight = checkRight(table, rowZ, colZ);
-                    int withinUp = checkUp(table, rowZ, colZ);
-                    if(withinLeft == 1)
+                    int withinLeft = checkLeft(table, rowZ, colZ), withinRight = checkRight(table, rowZ, colZ), withinUp = checkUp(table, rowZ, colZ);
+                    
+                    if (withinLeft == 1)
                     {
                         table[rowZ][colZ - 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+                       
                         system("PAUSE");
                     }
-                    else if(withinRight == 1)
+                    else if (withinRight == 1)
                     {
                         table[rowZ][colZ + 1] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+                        
                         system("PAUSE");
                     }
-                    else if(withinUp == 1)
+                    else if (withinUp == 1)
                     {
                         table[rowZ - 1][colZ] = zombChar;
                         table[rowZ][colZ] = ' ';
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                        
                         system("PAUSE");
                     }
                     else
                     {
                         system("CLS");
+
                         move = move + 1;
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                        cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                        
                         system("PAUSE");
                     }
                 }
             }
-            else if(colZ == 0)
+            else if (colZ == 0)
             {
-                //check up & down & right
-                int withinUp = checkUp(table, rowZ, colZ);
-                int withinDown = checkDown(table, rowZ, colZ);
-                int withinRight = checkRight(table, rowZ, colZ);
-                if(withinUp == 1)
+                int withinUp = checkUp(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ), withinRight = checkRight(table, rowZ, colZ);
+                
+                if (withinUp == 1)
                 {
                     table[rowZ - 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinDown == 1)
+                else if (withinDown == 1)
                 {
                     table[rowZ + 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinRight == 1)
+                else if (withinRight == 1)
                 {
                     table[rowZ][colZ + 1] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+                    
                     system("PAUSE");
                 }
                 else
                 {
                     system("CLS");
+
                     move = move + 1;
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                    
                     system("PAUSE");
                 }
-
             }
-            else if(colZ == y - 1)
+            else if (colZ == y - 1)
             {
-                //check up & down & left
-                int withinUp = checkUp(table, rowZ, colZ);
-                int withinDown = checkDown(table, rowZ, colZ);
-                int withinLeft = checkLeft(table, rowZ, colZ);
-                if(withinUp == 1)
+                int withinUp = checkUp(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ), withinLeft = checkLeft(table, rowZ, colZ);
+                
+                if (withinUp == 1)
                 {
                     table[rowZ - 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinDown == 1)
+                else if (withinDown == 1)
                 {
                     table[rowZ + 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinLeft == 1)
+                else if (withinLeft == 1)
                 {
                     table[rowZ][colZ - 1] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+                    
                     system("CLS");
+                    
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+                    
                     system("PAUSE");
                 }
                 else
                 {
                     move = move + 1;
+                    
                     system("CLS");
+                    
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                    
                     system("PAUSE");
                 }
             }
             else
             {
-                //check up & down & left & right
-                int withinUp = checkUp(table, rowZ, colZ);
-                int withinDown = checkDown(table, rowZ, colZ);
-                int withinLeft = checkLeft(table, rowZ, colZ);
-                int withinRight = checkRight(table, rowZ, colZ);
-                if(withinUp == 1)
+                int withinUp = checkUp(table, rowZ, colZ), withinDown = checkDown(table, rowZ, colZ), withinLeft = checkLeft(table, rowZ, colZ), withinRight = checkRight(table, rowZ, colZ);
+                
+                if (withinUp == 1)
                 {
                     table[rowZ - 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves upwards." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves upwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinDown == 1)
+                else if (withinDown == 1)
                 {
                     table[rowZ + 1][colZ] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
+                    
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves downwards." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves downwards." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinLeft == 1)
+                else if (withinLeft == 1)
                 {
                     table[rowZ][colZ - 1] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves to the left." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves to the left." << endl;
+                    
                     system("PAUSE");
                 }
-                else if(withinRight == 1)
+                else if (withinRight == 1)
                 {
                     table[rowZ][colZ + 1] = zombChar;
                     table[rowZ][colZ] = ' ';
                     move = move + 1;
+                    
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " moves to the right." << endl;
+                    
+                    cout << endl; cout << "Zombie " << zombChar << " moves to the right." << endl;
+                    
                     system("PAUSE");
                 }
                 else
                 {
                     move = move + 1;
+
                     system("CLS");
+
                     tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                    cout << endl << "Zombie " << zombChar << " are restricted to move." << endl;
+
+                    cout << endl; cout << "Zombie " << zombChar << " are restricted to move." << endl;
+                    
                     system("PAUSE");
                 }
             }
-
         }
         else if (move == 2)
         {
             rowZ = zombiesRow(table, zombChar, y);
             colZ = zombiesCol(table, zombChar, y);
-            if(rowZ == rowA)
+            
+            if (rowZ == rowA)
             {
                 int rangeDis;
-                if(colZ >= colA)
+                
+                if (colZ >= colA)
                 {
                     rangeDis = colZ - colA;
-                    if(rangeDis <= allZombiesStats[zombStatsIndex][2])
+                    
+                    if (rangeDis <= allZombiesStats[zombStatsIndex][2])
                     {
                         move = move + 1;
-                        if(alienStats[0] > allZombiesStats[zombStatsIndex][1])
+                        
+                        if (alienStats[0] > allZombiesStats[zombStatsIndex][1])
                         {
                             move = move + 1;
                             alienStats[0] = alienStats[0] - allZombiesStats[zombStatsIndex][1];
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             system("PAUSE");
                         }
                         else
                         {
                             move = move + 1;
                             alienStats[0] = 0;
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             turn.erase(turn.begin());
+                            
                             system("PAUSE");
                         }
                     }
                     else
                     {
                         move = move + 1;
+
                         system("CLS");
+
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
                         system("PAUSE");
                     }
                 }
                 else
                 {
                     rangeDis = colA - colZ;
-                    if(rangeDis <= allZombiesStats[zombStatsIndex][2])
+                    
+                    if (rangeDis <= allZombiesStats[zombStatsIndex][2])
                     {
-                        if(alienStats[0] > allZombiesStats[zombStatsIndex][1])
+                        if (alienStats[0] > allZombiesStats[zombStatsIndex][1])
                         {
                             move = move + 1;
                             alienStats[0] = alienStats[0] - allZombiesStats[zombStatsIndex][1];
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             system("PAUSE");
                         }
                         else
                         {
                             move = move + 1;
                             alienStats[0] = 0;
+                            
                             system("CLS");
+
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             turn.erase(turn.begin());
+                            
                             system("PAUSE");
                         }
                     }
                     else
                     {
                         move = move + 1;
+                        
                         system("CLS");
+                        
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
                         system("PAUSE");
                     }
                 }
             }
-            else if(colZ == colA)
+            else if (colZ == colA)
             {
                 int rangeDis;
-                if(rowZ >= rowA)
+                if (rowZ >= rowA)
                 {
                     rangeDis = rowZ - rowA;
-                    if(rangeDis <= allZombiesStats[zombStatsIndex][2])
+                    if (rangeDis <= allZombiesStats[zombStatsIndex][2])
                     {
-                        if(alienStats[0] > allZombiesStats[zombStatsIndex][1])
+                        if (alienStats[0] > allZombiesStats[zombStatsIndex][1])
                         {
                             move = move + 1;
                             alienStats[0] = alienStats[0] - allZombiesStats[zombStatsIndex][1];
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             system("PAUSE");
                         }
                         else
                         {
                             move = move + 1;
                             alienStats[0] = 0;
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             turn.erase(turn.begin());
+                            
                             system("PAUSE");
                         }
                     }
                     else
                     {
                         move = move + 1;
+                        
                         system("CLS");
+                        
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
                         system("PAUSE");
                     }
                 }
                 else
                 {
                     rangeDis = rowA - rowZ;
-                    if(rangeDis <= allZombiesStats[zombStatsIndex][2])
+                    
+                    if (rangeDis <= allZombiesStats[zombStatsIndex][2])
                     {
-                        if(alienStats[0] > allZombiesStats[zombStatsIndex][1])
+                        if (alienStats[0] > allZombiesStats[zombStatsIndex][1])
                         {
                             move = move + 1;
                             alienStats[0] = alienStats[0] - allZombiesStats[zombStatsIndex][1];
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             system("PAUSE");
                         }
                         else
                         {
                             move = move + 1;
                             alienStats[0] = 0;
+                            
                             system("CLS");
+                            
                             tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                            cout << endl << "Zombie " << zombChar << " attack Alien." << endl;
-                            cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
+                            cout << endl; cout << "Zombie " << zombChar << " attack Alien." << endl; cout << "Alien receives a damage of " << allZombiesStats[zombStatsIndex][1] << endl;
+                            
                             turn.erase(turn.begin());
+                            
                             system("PAUSE");
                         }
                     }
                     else
                     {
                         move = move + 1;
+                        
                         system("CLS");
+                        
                         tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                        cout << endl << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
+                        cout << endl; cout << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                        
                         system("PAUSE");
                     }
                 }
@@ -1174,34 +1490,45 @@ void zombieMovement(vector<vector<char>>& table, vector<int>& alienStats, vector
             else
             {
                 move = move + 1;
+                
                 system("CLS");
+                
                 tablePrinting(table, alienStats, allZombiesStats, x, y, z);
-                cout << endl << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                
+                cout << endl; cout << "Zombie " << zombChar << " unable to attack Alien because too far away." << endl;
+                
                 system("PAUSE");
             }
         }
     }
 }
 
+// A void function to save the current game
 void saveGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, vector<int>& turn, const int x, const int y, const int z)
 {
-    string fileName; // Define variable for file's name
-    cout << "Type in your own filename (without .txt) => "; // Asks user to input in a file name without .txt as the program will automatically add .txt for them
-    cin >> fileName; // Input in file's name
+    // Define variable for file's name
+    string fileName; 
 
-    ofstream file; // Open file
-    file.open(fileName + ".txt"); // Open file based on user's file's name
+    // Asks user to input in a file name with
+    cout << "Type in your own filename => "; cin >> fileName;
 
-    file << x << endl; file << y << endl; file << z << endl; // save the rowNum, colNum and zombiesNum information;
+    // Open file
+    ofstream file; 
+    file.open(fileName);
 
-    for(int i = 0; i < alienStats.size(); ++i) // save the alienStats information
+    // Save the rowNum, colNum and zombiesNum information;  
+    file << x << endl; file << y << endl; file << z << endl;
+
+    // Save the alienStats information
+    for(int i = 0; i < alienStats.size(); ++i)
     {
         file << alienStats[i] << " ";
     }
 
     file << endl;
 
-    for(int i = 0 ; i < allZombiesStats.size(); ++i) // save the zombies stats information
+    // Save the zombies stats information
+    for(int i = 0 ; i < allZombiesStats.size(); ++i)
     {
         for(int j = 0; j < 3; ++j)
         {
@@ -1211,14 +1538,16 @@ void saveGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vecto
 
     file << endl;
 
-    for(int i = 0; i < turn.size(); ++i) // save the turn information
+    // Save the turn information
+    for(int i = 0; i < turn.size(); ++i)
     {
         file << turn[i] << " ";
     }
 
     file << endl;
 
-    for(int i = 0; i < table.size(); ++i) // save the gameboard information
+    // Save the gameboard information
+    for(int i = 0; i < table.size(); ++i)
     {
         for(int j = 0; j < y; ++j)
         {
@@ -1228,325 +1557,643 @@ void saveGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vecto
 
     file << endl;
 
-    file.close(); // Close file
+    // Close file
+    file.close(); 
 
-    cout << "Game Saved " << endl; // Program prints out confirmation after saving files
-    system("PAUSE"); // Pause screen to give user time to read the confirmation message
+    // Program prints out confirmation after saving files
+    cout << "Game Saved " << endl;
+
+    system("PAUSE"); 
+}
+
+// A void function to load the saved game
+void loadGame(vector<vector<char>>& table, vector<int>& alienStats, vector<vector<int>>& allZombiesStats, const int x, const int y, const int z)
+{
+    string fileName, line;
+    cout << "Type in the saved file's name => ";
+    cin >> fileName;
+
+    system("CLS");
+    ifstream file;
+    file.open(fileName);
+
+    if (file.is_open())
+    {
+        while (getline(file, line))
+        {
+            cout << line << endl;
+        }
+        file.close();
+        system("PAUSE");
+    }
+    else
+    {
+        cout << "File doesn't exists" << endl;
+        system("PAUSE");
+    }
+    system("PAUSE");
 }
 
 void gameMainMenu() // Void function for Alien Vs Zombies Main Menu
 {
     // Game Menu for Alien Vs Zombies
     cout << "========================== " << endl;
-    cout << "  .: Alien Vs Zombies :.  " << endl;
+    cout << "  .: Alien Vs Zombies :.   " << endl;
     cout << "========================== " << endl;
-    cout << "| 1. Start Game          | " << endl;
+    cout << "| 1. Start New Game      | " << endl;
     cout << "| 2. Load Game           | " << endl;
-    cout << "| 3. About Game          | " << endl;
-    cout << "| 4. Exit                | " << endl;
+    cout << "| 3. Settings            | " << endl;
+    cout << "| 4. About Game          | " << endl;
+    cout << "| 5. Exit                | " << endl;
     cout << "========================== " << endl;
 }
 
 int main()
 {
     bool mainMenu = true;
+
     srand(time(NULL));
-    while(mainMenu)
+
+    while (mainMenu)
     {
         int playerChoice;
         vector<int> turn;
-        system("CLS");
-        gameMainMenu(); // Display main menu for Alien Vs Zombies
-        cout << "Your choice => ";
-        cin >> playerChoice; // Ask the player to choose an option (1, 2, 3 or 4)
 
-        // If statement if player chose 1 to start game
+        system("CLS");
+        gameMainMenu(); 
+        cout << "Your choice (1, 2, 3, 4, 5) => ";
+        cin >> playerChoice; 
+
         if (playerChoice == 1)
         {
-            mainMenu = false; // Ignore mainMenu
-            int rowNum = 3, colNum = 19, zombiesNum = 2; // Default values for the number of row, column and zombies
-            char playerChoice;                           // Define the variable for player's choice to change the default values
+            mainMenu = false;                            // Ignore mainMenu
+            int rowNum, colNum, zombiesNum; // Default values for the number of row, column and zombies
+            char useDefOrUpd, playerChoice;                           // Define the variable for player's choice to change the default values
             bool gameSettings = true;                    // Define the variable for gameSettings for loop purposes
 
             while (gameSettings)
             {
-                // Display default values before printing the Game Board
-                system("CLS");
-                cout << "=================== " << endl;
-                cout << "Game Board Settings " << endl;
-                cout << "=================== " << endl;
-                cout << "Row => " << rowNum << endl;
-                cout << "Column => " << colNum << endl;
-                cout << "Zombies => " << zombiesNum << endl;
-                cout << "=================== " << endl;
+                cout << "Do you want to use the default game settings or the updated game settings? (d/u) => "; cin >> useDefOrUpd;
 
-                // Ask the player if he/she wants to change the default values
-                cout << "Do you want to change the default values? (y/n) => ";
-                cin >> playerChoice;
-
-                // If statement if player decides to change the default value
-                if (playerChoice == 'Y' || playerChoice == 'y')
+                if (useDefOrUpd == 'D' || useDefOrUpd == 'd')
                 {
-                    gameSettings = false;                       // Ignore gameSettings
-                    int rowNum = 0, colNum = 0, zombiesNum = 0; // Resets default values to 0
-                    char playerChoice;                          // Define the variable for player's choice
-                    bool resetSettings = true;                  // Define the variable for newSettings and resetStatement for loop purposes
+                    int rowNum = 3, colNum = 19, zombiesNum = 2;
+                    // Display default values before printing the Game Board
+                    system("CLS");
 
-                    while (resetSettings)
+                    cout << "=================== " << endl;
+                    cout << "Game Board Settings " << endl;
+                    cout << "=================== " << endl;
+                    cout << "Row => " << rowNum << endl;
+                    cout << "Column => " << colNum << endl;
+                    cout << "Zombies => " << zombiesNum << endl;
+                    cout << "=================== " << endl;
+
+                    // Ask the player if he/she wants to change the default values
+                    cout << endl;
+                    cout << "Do you want to change the default values? (y/n) => ";
+                    cin >> playerChoice;
+
+                    // If statement if player decides to change the default value
+                    if (playerChoice == 'Y' || playerChoice == 'y')
                     {
-                        // Ask the player to type in new values for row, column and zombies
-                       system("CLS");
-                        cout << " ====================================================================================== " << endl;
-                        cout << " REMINDER! Game Requirements\n 1. Insert odd value only to ensure the Alien spawns in the middle of the Game Board\n 2. Minimum number of row is 3 and maximum number of row is 9\n 3. Minimum number of column is 3 and maximum number of column is 21\n 4. Minimum number of zombies is 1 and maximum number of column is 9 " << endl;
-                        cout << " ====================================================================================== " << endl;
-                        cout << " Enter a new value for row => ";
-                        cin >> rowNum;
-                        cout << " Enter a new value for column => ";
-                        cin >> colNum;
-                        cout << " Enter a new value for zombies => ";
-                        cin >> zombiesNum;
+                        gameSettings = false;                       // Ignore gameSettings
+                        int rowNum = 0, colNum = 0, zombiesNum = 0; // Resets default values to 0
+                        char playerChoice;                          // Define the variable for player's choice
+                        bool resetSettings = true;                  // Define the variable for newSettings and resetStatement for loop purposes
 
-                        if (rowNum > 9 || rowNum < 3 || colNum > 21 || colNum < 3 || zombiesNum > 9 || zombiesNum < 1)
+                        while (resetSettings)
                         {
-                            cout << " You did not meet the game requirement! Please try again!" << endl;
-                            system("PAUSE");
-                            resetSettings = true;
-                        }
-                        else
-                        {
-                            // Prints out the new updated value from previous statement
+                            // Ask the player to type in new values for row, column and zombies
                             system("CLS");
-                            cout << "=================== " << endl;
-                            cout << "Game Board Settings " << endl;
-                            cout << "=================== " << endl;
-                            cout << "Row => " << rowNum << endl;
-                            cout << "Column => " << colNum << endl;
-                            cout << "Zombies => " << zombiesNum << endl;
-                            cout << "=================== " << endl;
+                            cout << "====================================================================================== " << endl;
+                            cout << "REMINDER! Game Requirements\n 1. Insert odd value only to ensure the Alien spawns in the middle of the Game Board\n 2. Minimum number of row is 3 and maximum number of row is 9\n 3. Minimum number of column is 3 and maximum number of column is 21\n 4. Minimum number of zombies is 1 and maximum number of column is 9 " << endl;
+                            cout << "====================================================================================== " << endl;
+                            cout << endl;
+                            cout << "Enter a new value for row => ";
+                            cin >> rowNum;
+                            cout << "Enter a new value for column => ";
+                            cin >> colNum;
+                            cout << "Enter a new value for zombies => ";
+                            cin >> zombiesNum;
 
-                            // Ask whether or not the player wants to continue with the updated value or resets it
-                            cout << "C to continue/R to reset " << endl;
-                            cout << "Continue? (c/r)=> ";
-                            cin >> playerChoice;
-
-                            // If statement if the player wants to continue
-                            if (playerChoice == 'C' || playerChoice == 'c')
+                            if (rowNum > 9 || rowNum < 3 || colNum > 21 || colNum < 3 || zombiesNum > 9 || zombiesNum < 1)
                             {
-                                resetSettings = false; // Ignore resetSettings
-                                gameSettings = false;  // Ignore gameSettings
-                                bool inGame = true;
-                                int quitBefLosing = 1;
-                                int lose = 1;
-                                string option, choice;
-                                MakingTable board(rowNum, colNum, zombiesNum);
+                                cout << " You did not meet the game requirement! Please try again!" << endl;
+                                system("PAUSE");
+                                resetSettings = true;
+                            }
+                            else
+                            {
+                                // Prints out the new updated value from previous statement
                                 system("CLS");
-                                for (int i = 0; i <= zombiesNum; ++i)
-                                {
-                                    turn.push_back(i);
-                                }
-                                while (inGame)
-                                {
-                                    for (int i = 0; i < turn.size(); )
-                                    {
-                                        if (i == 0)
-                                        {
-                                            system("CLS");
-                                            tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
-                                            cout << endl;
-                                            cout << "It is your turn, the mightiest Alien in the milky way" << endl;
-                                            cout << endl;
-                                            cout << "Enter Your Command => ";
-                                            cin >> option;
-                                            if (option.compare("arrow") == 0)
-                                            {
-                                                bool truth = true;
-                                                int arrRow, arrCol;
-                                                int truthFlag = 1;
-                                                string direct;
-                                                
-                                                cout << endl;
-                                                cout << "Enter row of the arrow    => ";
-                                                cin >> arrRow; 
-                                                cout << "Enter column of the arrow => ";
-                                                cin >> arrCol; 
-                                                cout << "Enter the direction that you want (up/down/left/right) => ";
-                                                cin >> direct;
-                                                cout << endl;
+                                cout << "=================== " << endl;
+                                cout << "Game Board Settings " << endl;
+                                cout << "=================== " << endl;
+                                cout << "Row => " << rowNum << endl;
+                                cout << "Column => " << colNum << endl;
+                                cout << "Zombies => " << zombiesNum << endl;
+                                cout << "=================== " << endl;
 
-                                                for (int i = 0; i < board.table.size(); ++i)
+                                // Ask whether or not the player wants to continue with the updated value or resets it
+                                cout << endl;
+                                cout << "C to continue/R to reset " << endl;
+                                cout << "Continue? (c/r)=> ";
+                                cin >> playerChoice;
+
+                                // If statement if the player wants to continue
+                                if (playerChoice == 'C' || playerChoice == 'c')
+                                {
+                                    resetSettings = false; // Ignore resetSettings
+                                    gameSettings = false;  // Ignore gameSettings
+                                    bool inGame = true;
+                                    int quitBefLosing = 1;
+                                    int lose = 1;
+                                    string option, choice;
+                                    MakingTable board(rowNum, colNum, zombiesNum);
+                                    system("CLS");
+                                    for (int i = 0; i <= zombiesNum; ++i)
+                                    {
+                                        turn.push_back(i);
+                                    }
+                                    while (inGame)
+                                    {
+                                        for (int i = 0; i < turn.size();)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                system("CLS");
+                                                tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                                cout << endl;
+                                                cout << "It is your turn, the mightiest Alien in the milky way" << endl;
+                                                cout << endl;
+                                                cout << "Enter Your Command => ";
+                                                cin >> option;
+                                                if (option.compare("arrow") == 0)
                                                 {
-                                                    for (int j = 0; j < colNum; ++j)
+                                                    bool truth = true;
+                                                    int arrRow, arrCol;
+                                                    int truthFlag = 1;
+                                                    string direct;
+
+                                                    cout << endl;
+                                                    cout << "Enter row of the arrow    => ";
+                                                    cin >> arrRow;
+                                                    cout << "Enter column of the arrow => ";
+                                                    cin >> arrCol;
+                                                    cout << "Enter the direction that you want (up/down/left/right) => ";
+                                                    cin >> direct;
+                                                    cout << endl;
+
+                                                    for (int i = 0; i < board.table.size(); ++i)
                                                     {
-                                                        if ((board.table[arrRow - 1][arrCol - 1] == '^' || board.table[arrRow - 1][arrCol - 1] == 'v' || board.table[arrRow - 1][arrCol - 1] == '<' || board.table[arrRow - 1][arrCol - 1] == '>'))
+                                                        for (int j = 0; j < colNum; ++j)
                                                         {
-                                                            truthFlag = 0;
+                                                            if ((board.table[arrRow - 1][arrCol - 1] == '^' || board.table[arrRow - 1][arrCol - 1] == 'v' || board.table[arrRow - 1][arrCol - 1] == '<' || board.table[arrRow - 1][arrCol - 1] == '>'))
+                                                            {
+                                                                truthFlag = 0;
+                                                            }
                                                         }
                                                     }
+                                                    if (truthFlag == 0)
+                                                    {
+                                                        changeArrow(board.table, arrRow, arrCol, direct);
+                                                    }
+                                                    else if (truthFlag != 0)
+                                                    {
+                                                        cout << endl
+                                                             << "You enter the input in the wrong format." << endl
+                                                             << "Please make sure the coordinate and the direction are correct." << endl;
+                                                        system("PAUSE");
+                                                    }
                                                 }
-                                                if (truthFlag == 0)
+                                                else if ((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
                                                 {
-                                                    changeArrow(board.table, arrRow, arrCol, direct);
+                                                    ++i;
+                                                    alienMovement(option, board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum, turn);
+                                                    if (turn.size() == 1 && turn[0] == 0)
+                                                    {
+                                                        break;
+                                                    }
                                                 }
-                                                else if (truthFlag != 0)
+                                                else if (option.compare("help") == 0)
                                                 {
-                                                    cout << endl
-                                                         << "You enter the input in the wrong format." << endl
-                                                         << "Please make sure the coordinate and the direction are correct." << endl;
+                                                    cout << endl;
+                                                    cout << "============================================= " << endl;
+                                                    cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- load = Load a saved game from a file\n- quit = Quit the game " << endl;
+                                                    cout << "============================================= " << endl;
+                                                    system("PAUSE");
+                                                }
+                                                else if (option.compare("save") == 0)
+                                                {
+                                                    cout << endl;
+                                                    saveGame(board.table, board.alienStats, board.allZombiesStats, turn, rowNum, colNum, zombiesNum);
+                                                }
+                                                else if (option.compare("load") == 0)
+                                                {
+                                                    system("CLS");
+                                                    // loadGame(board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum);
+                                                    system("PAUSE");
+                                                }
+                                                else if (option.compare("quit") == 0)
+                                                {
+                                                    quitBefLosing = 0;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    cout << endl;
+                                                    cout << "Invalid input. Make sure the input are accurate." << endl
+                                                         << "please refer to help option for more information of the commands." << endl;
                                                     system("PAUSE");
                                                 }
                                             }
-                                            else if ((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
+                                            else if (i == turn.size() - 1)
                                             {
-                                                ++i;
-                                                alienMovement(option, board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum, turn);
-                                                if (turn.size() == 1 && turn[0] == 0)
+                                                system("CLS");
+                                                tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                                cout << endl;
+                                                cout << "It is zombie " << turn[i] << " turn....";
+                                                cout << endl;
+                                                system("PAUSE");
+                                                zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
+                                                if (turn[0] != 0)
                                                 {
+                                                    lose = 0;
                                                     break;
                                                 }
-                                            }
-                                            else if (option.compare("help") == 0)
-                                            {
-                                                cout << endl;
-                                                cout << "============================================= " << endl;
-                                                cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- quit = Quit the game " << endl;
-                                                cout << "============================================= " << endl;
-                                                system("PAUSE");
-                                            }
-                                            else if (option.compare("save") == 0)
-                                            {
-                                                saveGame(board.table, board.alienStats, board.allZombiesStats, turn, rowNum, colNum, zombiesNum);
-                                            }
-                                            else if (option.compare("quit") == 0)
-                                            {
-                                                quitBefLosing = 0;
-                                                break;
+                                                i = i - turn.size() + 1;
                                             }
                                             else
                                             {
+                                                system("CLS");
+                                                tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
                                                 cout << endl;
-                                                cout << "Invalid input. Make sure the input are accurate." << endl
-                                                     << "please refer to help option for more information of the commands." << endl;
+                                                cout << "It is zombie " << turn[i] << " turn....";
+                                                cout << endl;
                                                 system("PAUSE");
+                                                zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
+                                                if (turn[0] != 0)
+                                                {
+                                                    lose = 0;
+                                                    break;
+                                                }
+                                                ++i;
                                             }
                                         }
-                                        else if (i == turn.size() - 1)
+
+                                        if (quitBefLosing == 0)
                                         {
-                                            system("CLS");
-                                            tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                            inGame = false;
+                                            gameSettings = false;
+                                            mainMenu = true;
+                                            cout << endl
+                                                 << "Entering main menu...." << endl;
+                                            system("PAUSE");
+                                        }
+                                        else if (lose == 0)
+                                        {
+                                            inGame = false;
+                                            gameSettings = false;
+                                            mainMenu = true;
                                             cout << endl;
-                                            cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
-                                            system("PAUSE");  
-                                            zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                                            if(turn[0] != 0)
-                                            {
-                                                lose = 0;
-                                                break;
-                                            }
-                                            i = i - turn.size() + 1;
+                                            cout << "THE MIGHTY ALIEN UNFORTUNATELY LOST IT PRECIOUS LIVES! YOU LOST!" << endl;
+                                            cout << endl
+                                                 << "Entering main menu...." << endl;
+                                            system("PAUSE");
                                         }
                                         else
                                         {
-                                            system("CLS");
-                                            tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
-                                            cout << endl;
-                                            cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
-                                            system("PAUSE");  
-                                            zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                                            if(turn[0] != 0)
+                                            bool endGame = true;
+                                            while (endGame)
                                             {
-                                                lose = 0;
-                                                break;
-                                            }
-                                            ++i;
-                                        }
-                                    }
+                                                cout << endl;
+                                                cout << "ALL ZOMBIES HAVE BEEN DEFEATED! YOU WON!" << endl;
+                                                cout << "Go back to Main Menu? (Y to return to main menu/N to play the game again)=> ";
+                                                cin >> choice;
 
-                                    if(quitBefLosing == 0)
-                                    {
-                                        inGame = false;
-                                        gameSettings = false;
-                                        mainMenu = true;
-                                        cout << endl << "Entering main menu...." << endl; system("PAUSE");
-                                    }
-                                    else if(lose == 0)
-                                    {
-                                        inGame = false;
-                                        gameSettings = false;
-                                        mainMenu = true;
-                                        cout << "You lost the game" << endl;
-                                        cout << endl << "Entering main menu...." << endl; system("PAUSE");
-                                    }
-                                    else
-                                    {
-                                        bool endGame = true;
-                                        while(endGame)
-                                        {
-                                            cout << endl;
-                                            cout << "You have won the game!!!!" << endl;
-                                            cout << "Go back to Main Menu? (Y to return to main menu/N to play the game again)=> ";
-                                            cin >> choice;
-
-                                            if (choice == "Y" || choice == "y")
-                                            {
-                                                // Program starts returning to Main Menu
-                                                endGame = false;
-                                                inGame = false;
-                                                resetSettings = false;
-                                                gameSettings = false;
-                                                mainMenu = true;
-                                                // Program stops returning to Main Menu
-                                            }
-                                            else if (choice == "N" || choice == "n")
-                                            {
-                                                // Program starts restarting the game
-                                                endGame = false;
-                                                inGame = true;
-                                                resetSettings = false;
-                                                gameSettings = false;
-                                                mainMenu = false;
-                                                // Program stops restarting the game
-                                            }
-                                            else
-                                            {
-                                                cout << "Invalid input! Please try again..." << endl;
-                                                system("PAUSE");
-                                                // Program starts printing endGame statement again
-                                                endGame = true;
-                                                inGame = false;
-                                                resetSettings = false;
-                                                gameSettings = false;
-                                                mainMenu = false;
-                                                // Program stops printing endGame statement again
+                                                if (choice == "Y" || choice == "y")
+                                                {
+                                                    // Program starts returning to Main Menu
+                                                    endGame = false;
+                                                    inGame = false;
+                                                    resetSettings = false;
+                                                    gameSettings = false;
+                                                    mainMenu = true;
+                                                    // Program stops returning to Main Menu
+                                                }
+                                                else if (choice == "N" || choice == "n")
+                                                {
+                                                    // Program starts restarting the game
+                                                    endGame = false;
+                                                    inGame = true;
+                                                    resetSettings = false;
+                                                    gameSettings = false;
+                                                    mainMenu = false;
+                                                    // Program stops restarting the game
+                                                }
+                                                else
+                                                {
+                                                    cout << "Invalid input! Please try again..." << endl;
+                                                    system("PAUSE");
+                                                    // Program starts printing endGame statement again
+                                                    endGame = true;
+                                                    inGame = false;
+                                                    resetSettings = false;
+                                                    gameSettings = false;
+                                                    mainMenu = false;
+                                                    // Program stops printing endGame statement again
+                                                }
                                             }
                                         }
                                     }
-                                    
                                 }
-                            }
-                            // Else if statement if the player wants to reset
-                            else if (playerChoice == 'r' || playerChoice == 'R')
-                            {
-                                resetSettings = true; // Return newSettings
-                                gameSettings = false; // Ignore gameSettings
-                            }
-                            // Else statement if the player inputs in neither C to continue or R to reset
-                            else
-                            {
-                                cout << " Invalid input! Please try again..." << endl;
-                                system("PAUSE");
-                                resetSettings = true; // Ignore newSettings
-                                gameSettings = false; // Ignore gameSettings
+                                // Else if statement if the player wants to reset
+                                else if (playerChoice == 'r' || playerChoice == 'R')
+                                {
+                                    resetSettings = true; // Return newSettings
+                                    gameSettings = false; // Ignore gameSettings
+                                }
+                                // Else statement if the player inputs in neither C to continue or R to reset
+                                else
+                                {
+                                    cout << " Invalid input! Please try again..." << endl;
+                                    system("PAUSE");
+                                    resetSettings = true; // Ignore newSettings
+                                    gameSettings = false; // Ignore gameSettings
+                                }
                             }
                         }
                     }
+                    // Else if statement if the player doesn't want to change the value
+                    else if (playerChoice == 'N' || playerChoice == 'n')
+                    {
+                        bool inGame = true;
+                        string option;
+                        int quitBefLosing = 1;
+                        int lose = 1;
+                        MakingTable board(rowNum, colNum, zombiesNum);
+                        system("CLS");
+                        for (int i = 0; i <= zombiesNum; ++i)
+                        {
+                            turn.push_back(i);
+                        }
+                        while (inGame)
+                        {
+                            int goToMainQuit = 1;
+                            for (int i = 0; i < turn.size();)
+                            {
+                                if (i == 0)
+                                {
+                                    system("CLS");
+                                    tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                    cout << endl;
+                                    cout << "It is your turn, the mightiest Alien in the milky way" << endl;
+                                    cout << endl;
+                                    cout << "Enter Your Command => ";
+                                    cin >> option;
+                                    if (option.compare("arrow") == 0)
+                                    {
+                                        int arrRow, arrCol;
+                                        int truthFlag = 1;
+                                        string direct;
+
+                                        cout << endl;
+                                        cout << "Enter row of the arrow    => ";
+                                        cin >> arrRow; // cout << endl;
+                                        cout << "Enter column of the arrow => ";
+                                        cin >> arrCol; // cout << endl;
+                                        cout << "Enter the direction that you want (up/down/left/right) => ";
+                                        cin >> direct;
+                                        cout << endl;
+                                        for (int i = 0; i < board.table.size(); ++i)
+                                        {
+                                            for (int j = 0; j < colNum; ++j)
+                                            {
+                                                if ((board.table[arrRow - 1][arrCol - 1] == '^' || board.table[arrRow - 1][arrCol - 1] == 'v' || board.table[arrRow - 1][arrCol - 1] == '<' || board.table[arrRow - 1][arrCol - 1] == '>'))
+                                                {
+                                                    truthFlag = 0;
+                                                }
+                                            }
+                                        }
+                                        if (truthFlag == 0)
+                                        {
+                                            changeArrow(board.table, arrRow, arrCol, direct);
+                                        }
+                                        else if (truthFlag != 0)
+                                        {
+                                            cout << endl
+                                                 << "You enter the input in the wrong format." << endl
+                                                 << "Please make sure the coordinate and the direction are correct." << endl;
+                                            system("PAUSE");
+                                        }
+                                    }
+                                    else if ((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
+                                    {
+                                        ++i;
+                                        alienMovement(option, board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum, turn);
+                                    }
+                                    else if (option.compare("help") == 0)
+                                    {
+                                        cout << endl;
+                                        cout << "============================================= " << endl;
+                                        cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- load = Load a saved game from a file\n- quit = Quit the game " << endl;
+                                        cout << "============================================= " << endl;
+                                        system("PAUSE");
+                                    }
+                                    else if (option.compare("save") == 0)
+                                    {
+                                        saveGame(board.table, board.alienStats, board.allZombiesStats, turn, rowNum, colNum, zombiesNum);
+                                    }
+                                    else if (option.compare("load") == 0)
+                                    {
+                                        string fileName, line;
+                                        char array[100];
+                                        int i;
+
+                                        cout << "Type in the saved file's name (with .txt) => ";
+                                        cin >> fileName;
+
+                                        ifstream file(fileName);
+
+                                        if (!file)
+                                        {
+                                            cout << "File doesn't exists!" << endl;
+                                        }
+
+                                        while (getline(file, line))
+                                        {
+                                            cout << line << endl;
+                                        }
+
+                                        for (i = 0; i < line.length(); ++i)
+                                        {
+                                            array[i] = line[i];
+                                        }
+
+                                        array[i] = '\0';
+
+                                        file.close();
+
+                                        system("CLS");
+
+                                        cout << array << endl;
+
+                                        system("PAUSE");
+                                    }
+                                    else if (option.compare("quit") == 0)
+                                    {
+                                        quitBefLosing = 0;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        cout << "Invalid input. Make sure the input are accurate." << endl
+                                             << "Please refer to help option for more information of the commands." << endl;
+                                        system("PAUSE");
+                                    }
+                                }
+                                else if (i == turn.size() - 1)
+                                {
+                                    system("CLS");
+                                    tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                    cout << endl;
+                                    cout << "It is zombie " << turn[i] << " turn....";
+                                    cout << endl;
+                                    system("PAUSE");
+                                    zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
+                                    if (turn[0] != 0)
+                                    {
+                                        lose = 0;
+                                        break;
+                                    }
+                                    i = i - turn.size() + 1;
+                                }
+                                else
+                                {
+                                    system("CLS");
+                                    tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
+                                    cout << endl;
+                                    cout << "It is zombie " << turn[i] << " turn....";
+                                    cout << endl;
+                                    system("PAUSE");
+                                    zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
+                                    if (turn[0] != 0)
+                                    {
+                                        lose = 0;
+                                        break;
+                                    }
+                                    ++i;
+                                }
+                            }
+                            if (quitBefLosing == 0)
+                            {
+                                inGame = false;
+                                gameSettings = false;
+                                mainMenu = true;
+                                cout << endl
+                                     << "Entering main manu...." << endl;
+                                system("PAUSE");
+                            }
+                            else if (lose == 0)
+                            {
+                                inGame = false;
+                                gameSettings = false;
+                                mainMenu = true;
+                                cout << endl;
+                                cout << "THE MIGHTY ALIEN UNFORTUNATELY LOST IT PRECIOUS LIVES! YOU LOST!" << endl;
+                                cout << endl
+                                     << "Entering main manu...." << endl;
+                                system("PAUSE");
+                            }
+                            else
+                            {
+                                bool endGame = true;
+                                while (endGame)
+                                {
+                                    char choice;
+                                    system("CLS");
+                                    cout << endl;
+                                    cout << "ALL ZOMBIES HAVE BEEN DEFEATED! YOU WON!" << endl;
+                                    cout << "Go back to Main Menu? (Y to return to main menu/N to play the game again)=> ";
+                                    cin >> choice;
+
+                                    if (choice == 'Y' || choice == 'y')
+                                    {
+                                        // Program starts returning to Main Menu
+                                        endGame = false;
+                                        inGame = false;
+                                        gameSettings = false;
+                                        mainMenu = true;
+                                        // Program stops returning to Main Menu
+                                    }
+                                    else if (choice == 'N' || choice == 'n')
+                                    {
+                                        // Program starts restarting the game
+                                        endGame = false;
+                                        inGame = true;
+                                        gameSettings = false;
+                                        mainMenu = false;
+                                        // Program stops restarting the game
+                                    }
+                                    else
+                                    {
+                                        cout << "Invalid input! Please try again..." << endl;
+                                        system("PAUSE");
+                                        // Program starts printing endGame statement again
+                                        endGame = true;
+                                        inGame = false;
+                                        gameSettings = false;
+                                        mainMenu = false;
+                                        // Program stops printing endGame statement again
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cout << " Invalid input! Please try again... " << endl;
+                        system("PAUSE");
+                        gameSettings = true; // Return gameSettings
+                    }
                 }
-                // Else if statement if the player doesn't want to change the value
-                else if (playerChoice == 'N' || playerChoice == 'n')
+                else if (useDefOrUpd == 'U' || useDefOrUpd == 'u')
                 {
+
+                    gameSettings = false;
+                    mainMenu = false;
+
+                    string nRowNum, nColNum, nZombiesNum;
+                    int rowNum, colNum, zombiesNum;
+
+                    ifstream read("settings.txt");
+                    getline(read, nRowNum);
+                    getline(read, nColNum);
+                    getline(read, nZombiesNum);
+
+                    system("CLS");
+
+                    cout << "=========================== " << endl;
+                    cout << "Updated Game Board Settings " << endl;
+                    cout << "=========================== " << endl;
+                    cout << "Row     => " << nRowNum << endl;
+                    cout << "Column  => " << nColNum << endl;
+                    cout << "Zombies => " << nZombiesNum << endl;
+                    cout << "=========================== " << endl;
+
+                    rowNum = stoi(nRowNum);
+                    colNum = stoi(nColNum);
+                    zombiesNum = stoi(nZombiesNum);
+
+                    system("PAUSE");
+
+                    system("CLS");
+
                     bool inGame = true;
-                    string option;
                     int quitBefLosing = 1;
                     int lose = 1;
+                    string option, choice;
                     MakingTable board(rowNum, colNum, zombiesNum);
                     system("CLS");
                     for (int i = 0; i <= zombiesNum; ++i)
@@ -1555,8 +2202,7 @@ int main()
                     }
                     while (inGame)
                     {
-                        int goToMainQuit = 1;
-                        for (int i = 0; i < turn.size(); )
+                        for (int i = 0; i < turn.size();)
                         {
                             if (i == 0)
                             {
@@ -1565,62 +2211,84 @@ int main()
                                 cout << endl;
                                 cout << "It is your turn, the mightiest Alien in the milky way" << endl;
                                 cout << endl;
-                                cout << "Enter Your Command => "; cin >> option;
-                                if(option.compare("arrow") == 0)
+                                cout << "Enter Your Command => ";
+                                cin >> option;
+                                if (option.compare("arrow") == 0)
                                 {
+                                    bool truth = true;
                                     int arrRow, arrCol;
                                     int truthFlag = 1;
                                     string direct;
 
                                     cout << endl;
-                                    cout << "Enter row of the arrow    => "; cin >> arrRow;// cout << endl;
-                                    cout << "Enter column of the arrow => "; cin >> arrCol;// cout << endl;
-                                    cout << "Enter the direction that you want (up/down/left/right) => "; cin >> direct; cout << endl;
-                                    for(int i = 0; i < board.table.size(); ++i)
+                                    cout << "Enter row of the arrow    => ";
+                                    cin >> arrRow;
+                                    cout << "Enter column of the arrow => ";
+                                    cin >> arrCol;
+                                    cout << "Enter the direction that you want (up/down/left/right) => ";
+                                    cin >> direct;
+                                    cout << endl;
+
+                                    for (int i = 0; i < board.table.size(); ++i)
                                     {
-                                        for(int j = 0; j < colNum; ++j)
+                                        for (int j = 0; j < colNum; ++j)
                                         {
-                                            if((board.table[arrRow - 1][arrCol - 1] == '^' || board.table[arrRow - 1][arrCol - 1] == 'v' || board.table[arrRow - 1][arrCol - 1] == '<' || board.table[arrRow - 1][arrCol - 1] == '>'))
+                                            if ((board.table[arrRow - 1][arrCol - 1] == '^' || board.table[arrRow - 1][arrCol - 1] == 'v' || board.table[arrRow - 1][arrCol - 1] == '<' || board.table[arrRow - 1][arrCol - 1] == '>'))
                                             {
                                                 truthFlag = 0;
                                             }
                                         }
                                     }
-                                    if(truthFlag == 0)
+                                    if (truthFlag == 0)
                                     {
                                         changeArrow(board.table, arrRow, arrCol, direct);
                                     }
-                                    else if(truthFlag != 0)
+                                    else if (truthFlag != 0)
                                     {
-                                        cout << endl << "You enter the input in the wrong format." << endl << "Please make sure the coordinate and the direction are correct." << endl;
+                                        cout << endl
+                                             << "You enter the input in the wrong format." << endl
+                                             << "Please make sure the coordinate and the direction are correct." << endl;
                                         system("PAUSE");
                                     }
                                 }
-                                else if((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
+                                else if ((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
                                 {
                                     ++i;
                                     alienMovement(option, board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum, turn);
+                                    if (turn.size() == 1 && turn[0] == 0)
+                                    {
+                                        break;
+                                    }
                                 }
-                                else if(option.compare("help") == 0)
+                                else if (option.compare("help") == 0)
                                 {
                                     cout << endl;
                                     cout << "============================================= " << endl;
-                                    cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- quit = Quit the game " << endl;
+                                    cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- load = Load a saved game from a file\n- quit = Quit the game " << endl;
                                     cout << "============================================= " << endl;
                                     system("PAUSE");
                                 }
                                 else if (option.compare("save") == 0)
                                 {
+                                    cout << endl;
                                     saveGame(board.table, board.alienStats, board.allZombiesStats, turn, rowNum, colNum, zombiesNum);
                                 }
-                                else if(option.compare("quit") == 0)
+                                else if (option.compare("load") == 0)
+                                {
+                                    system("CLS");
+                                    // loadGame(board.table, board.alienStats, board.allZombiesStats, board, rowNum, colNum, zombiesNum);
+                                    system("PAUSE");
+                                }
+                                else if (option.compare("quit") == 0)
                                 {
                                     quitBefLosing = 0;
                                     break;
                                 }
                                 else
                                 {
-                                    cout << "Invalid input. Make sure the input are accurate." << endl << "Please refer to help option for more information of the commands." << endl;
+                                    cout << endl;
+                                    cout << "Invalid input. Make sure the input are accurate." << endl
+                                         << "please refer to help option for more information of the commands." << endl;
                                     system("PAUSE");
                                 }
                             }
@@ -1629,10 +2297,11 @@ int main()
                                 system("CLS");
                                 tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
                                 cout << endl;
-                                cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
-                                system("PAUSE");  
+                                cout << "It is zombie " << turn[i] << " turn....";
+                                cout << endl;
+                                system("PAUSE");
                                 zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                                if(turn[0] != 0)
+                                if (turn[0] != 0)
                                 {
                                     lose = 0;
                                     break;
@@ -1644,10 +2313,11 @@ int main()
                                 system("CLS");
                                 tablePrinting(board.table, board.alienStats, board.allZombiesStats, rowNum, colNum, zombiesNum);
                                 cout << endl;
-                                cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
+                                cout << "It is zombie " << turn[i] << " turn....";
+                                cout << endl;
                                 system("PAUSE");
                                 zombieMovement(board.table, board.alienStats, board.allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                                if(turn[0] != 0)
+                                if (turn[0] != 0)
                                 {
                                     lose = 0;
                                     break;
@@ -1655,33 +2325,38 @@ int main()
                                 ++i;
                             }
                         }
-                        if(quitBefLosing == 0)
+
+                        if (quitBefLosing == 0)
                         {
                             inGame = false;
                             gameSettings = false;
                             mainMenu = true;
-                            cout << endl << "Entering main manu...." << endl; system("PAUSE");
+                            cout << endl
+                                 << "Entering main menu...." << endl;
+                            system("PAUSE");
                         }
-                        else if(lose == 0)
+                        else if (lose == 0)
                         {
                             inGame = false;
                             gameSettings = false;
                             mainMenu = true;
-                            cout << "You have lose the game." << endl;
-                            cout << endl << "Entering main manu...." << endl; system("PAUSE");
+                            cout << endl;
+                            cout << "THE MIGHTY ALIEN UNFORTUNATELY LOST IT PRECIOUS LIVES! YOU LOST!" << endl;
+                            cout << endl
+                                 << "Entering main menu...." << endl;
+                            system("PAUSE");
                         }
                         else
                         {
                             bool endGame = true;
                             while (endGame)
                             {
-                                char choice;
-                                system("CLS");
-                                cout << "You have won the game!!!!" << endl;
+                                cout << endl;
+                                cout << "ALL ZOMBIES HAVE BEEN DEFEATED! YOU WON!" << endl;
                                 cout << "Go back to Main Menu? (Y to return to main menu/N to play the game again)=> ";
                                 cin >> choice;
 
-                                if (choice == 'Y' || choice == 'y')
+                                if (choice == "Y" || choice == "y")
                                 {
                                     // Program starts returning to Main Menu
                                     endGame = false;
@@ -1690,7 +2365,7 @@ int main()
                                     mainMenu = true;
                                     // Program stops returning to Main Menu
                                 }
-                                else if (choice == 'N' || choice == 'n')
+                                else if (choice == "N" || choice == "n")
                                 {
                                     // Program starts restarting the game
                                     endGame = false;
@@ -1711,18 +2386,21 @@ int main()
                                     // Program stops printing endGame statement again
                                 }
                             }
-                        }                
+                        }
                     }
                 }
                 else
                 {
-                    cout << " Invalid input! Please try again... " << endl;
+                    cout << endl;
+                    cout << "Invalid input! Please try again..." << endl;
+                    cout << endl;
+
                     system("PAUSE");
-                    gameSettings = true; // Return gameSettings
+
+                    gameSettings = true;
                 }
 
-                //game settings
-
+                // game settings
             }
         }
         else if (playerChoice == 2)
@@ -1737,10 +2415,11 @@ int main()
             vector<vector<int>> allZombiesStats;
             vector<int> turn;
 
-            cout << "Enter the file name you want to load => "; cin >> filename;
-            ifstream fileOpen(filename + ".txt");
+            cout << "Enter the file name you want to load => ";
+            cin >> filename;
+            ifstream fileOpen(filename);
 
-            if(fileOpen.fail())
+            if (fileOpen.fail())
             {
                 cout << "Error occured..." << endl;
             }
@@ -1768,10 +2447,10 @@ int main()
                 cout << alienStats.size() << endl;
 
                 // retrieve zombies stats
-                for(int i = 0; i < zombiesNum; ++i)
+                for (int i = 0; i < zombiesNum; ++i)
                 {
                     vector<int> inZomStats;
-                    for(int j = 0; j < 3; ++j)
+                    for (int j = 0; j < 3; ++j)
                     {
                         int zombiesInfo;
                         fileOpen >> zombiesInfo;
@@ -1782,7 +2461,7 @@ int main()
                 cout << allZombiesStats.size() << endl;
 
                 // retrieve turn
-                for(int i = 0; i < zombiesNum + 1; ++i)
+                for (int i = 0; i < zombiesNum + 1; ++i)
                 {
                     int attTurn;
                     fileOpen >> attTurn;
@@ -1792,21 +2471,21 @@ int main()
 
                 // retrieve the table information into string variable string line
                 int currLine = 0;
-                while(!fileOpen.eof())
+                while (!fileOpen.eof())
                 {
                     currLine++;
                     getline(fileOpen, line);
-                    if(line.size() > 1)
+                    if (line.size() > 1)
                     {
                         break;
                     }
                 }
 
                 int k = 0;
-                while(k < line.size())
+                while (k < line.size())
                 {
                     vector<char> inCol;
-                    for(int i = 0; i < colNum; ++i)
+                    for (int i = 0; i < colNum; ++i)
                     {
                         inCol.push_back(line[k]);
                         k = k + 1;
@@ -1814,15 +2493,15 @@ int main()
                     table.push_back(inCol);
                 }
                 fileOpen.close();
-                
+
                 MakingTable justFunction(rowNum, colNum, zombiesNum);
                 bool inGame = true;
                 int quitBefLosing = 1;
                 int lose = 1;
                 string option;
-                while(inGame)
+                while (inGame)
                 {
-                    for (int i = 0; i < turn.size(); )
+                    for (int i = 0; i < turn.size();)
                     {
                         if (i == 0)
                         {
@@ -1831,47 +2510,54 @@ int main()
                             cout << endl;
                             cout << "It is your turn, the mightiest Alien in the milky way" << endl;
                             cout << endl;
-                            cout << "Enter Your Command => "; cin >> option;
-                            if(option.compare("arrow") == 0)
+                            cout << "Enter Your Command => ";
+                            cin >> option;
+                            if (option.compare("arrow") == 0)
                             {
                                 int arrRow, arrCol;
                                 int truthFlag = 1;
                                 string direct;
 
                                 cout << endl;
-                                cout << "Enter row of the arrow    => "; cin >> arrRow;// cout << endl;
-                                cout << "Enter column of the arrow => "; cin >> arrCol;// cout << endl;
-                                cout << "Enter the direction that you want (up/down/left/right) => "; cin >> direct; cout << endl;
-                                for(int i = 0; i < table.size(); ++i)
+                                cout << "Enter row of the arrow    => ";
+                                cin >> arrRow; // cout << endl;
+                                cout << "Enter column of the arrow => ";
+                                cin >> arrCol; // cout << endl;
+                                cout << "Enter the direction that you want (up/down/left/right) => ";
+                                cin >> direct;
+                                cout << endl;
+                                for (int i = 0; i < table.size(); ++i)
                                 {
-                                    for(int j = 0; j < colNum; ++j)
+                                    for (int j = 0; j < colNum; ++j)
                                     {
-                                        if((table[arrRow - 1][arrCol - 1] == '^' || table[arrRow - 1][arrCol - 1] == 'v' || table[arrRow - 1][arrCol - 1] == '<' || table[arrRow - 1][arrCol - 1] == '>'))
+                                        if ((table[arrRow - 1][arrCol - 1] == '^' || table[arrRow - 1][arrCol - 1] == 'v' || table[arrRow - 1][arrCol - 1] == '<' || table[arrRow - 1][arrCol - 1] == '>'))
                                         {
                                             truthFlag = 0;
                                         }
                                     }
                                 }
-                                if(truthFlag == 0)
+                                if (truthFlag == 0)
                                 {
                                     changeArrow(table, arrRow, arrCol, direct);
                                 }
-                                else if(truthFlag != 0)
+                                else if (truthFlag != 0)
                                 {
-                                    cout << endl << "You enter the input in the wrong format." << endl << "Please make sure the coordinate and the direction are correct." << endl;
+                                    cout << endl
+                                         << "You enter the input in the wrong format." << endl
+                                         << "Please make sure the coordinate and the direction are correct." << endl;
                                     system("PAUSE");
                                 }
                             }
-                            else if((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
+                            else if ((option.compare("up") == 0 || option.compare("down") == 0 || option.compare("left") == 0 || option.compare("right") == 0))
                             {
                                 ++i;
                                 alienMovement(option, table, alienStats, allZombiesStats, justFunction, rowNum, colNum, zombiesNum, turn);
                             }
-                            else if(option.compare("help") == 0)
+                            else if (option.compare("help") == 0)
                             {
                                 cout << endl;
                                 cout << "============================================= " << endl;
-                                cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- quit = Quit the game " << endl;
+                                cout << "Command Guides\n- up = Alien moves upward\n- down = Alien moves downwards\n- left = Alien moves left\n- right = Alien moves right\n- arrow = Switch the direction of an arrow object in the Game Board\n- save = Save the current game to a file\n- load = Load a saved game from a file\n- quit = Quit the game " << endl;
                                 cout << "============================================= " << endl;
                                 system("PAUSE");
                             }
@@ -1879,14 +2565,19 @@ int main()
                             {
                                 saveGame(table, alienStats, allZombiesStats, turn, rowNum, colNum, zombiesNum);
                             }
-                            else if(option.compare("quit") == 0)
+                            else if (option.compare("load") == 0)
+                            {
+                                loadGame(table, alienStats, allZombiesStats, rowNum, colNum, zombiesNum);
+                            }
+                            else if (option.compare("quit") == 0)
                             {
                                 quitBefLosing = 0;
                                 break;
                             }
                             else
                             {
-                                cout << "Invalid input. Make sure the input are accurate." << endl << "Please refer to help option for more information of the commands." << endl;
+                                cout << "Invalid input. Make sure the input are accurate." << endl
+                                     << "Please refer to help option for more information of the commands." << endl;
                                 system("PAUSE");
                             }
                         }
@@ -1895,10 +2586,11 @@ int main()
                             system("CLS");
                             tablePrinting(table, alienStats, allZombiesStats, rowNum, colNum, zombiesNum);
                             cout << endl;
-                            cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
-                            system("PAUSE");  
+                            cout << "It is zombie " << turn[i] << " turn....";
+                            cout << endl;
+                            system("PAUSE");
                             zombieMovement(table, alienStats, allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                            if(turn[0] != 0)
+                            if (turn[0] != 0)
                             {
                                 lose = 0;
                                 break;
@@ -1910,10 +2602,11 @@ int main()
                             system("CLS");
                             tablePrinting(table, alienStats, allZombiesStats, rowNum, colNum, zombiesNum);
                             cout << endl;
-                            cout << "It is zombie " << turn[i] << " turn...."; cout << endl;
+                            cout << "It is zombie " << turn[i] << " turn....";
+                            cout << endl;
                             system("PAUSE");
                             zombieMovement(table, alienStats, allZombiesStats, turn[i], turn, rowNum, colNum, zombiesNum);
-                            if(turn[0] != 0)
+                            if (turn[0] != 0)
                             {
                                 lose = 0;
                                 break;
@@ -1922,33 +2615,123 @@ int main()
                         }
                     }
 
-                    if(quitBefLosing == 0)
+                    if (quitBefLosing == 0)
                     {
                         inGame = false;
                         mainMenu = true;
-                        cout << endl << "Entering main manu...." << endl; system("PAUSE");
+                        cout << endl
+                             << "Entering main manu...." << endl;
+                        system("PAUSE");
                     }
-                    else if(lose == 0)
+                    else if (lose == 0)
                     {
                         inGame = false;
                         mainMenu = true;
                         cout << "You have lose the game." << endl;
-                        cout << endl << "Entering main manu...." << endl; system("PAUSE");
+                        cout << endl
+                             << "Entering main manu...." << endl;
+                        system("PAUSE");
                     }
                     else
                     {
                         inGame = false;
                         mainMenu = true;
                         cout << "You have won the game." << endl;
-                        cout << endl << "Entering main manu...." << endl; system("PAUSE");
+                        cout << endl
+                             << "Entering main manu...." << endl;
+                        system("PAUSE");
                     }
                 }
             }
         }
         else if (playerChoice == 3)
         {
-            mainMenu = false;
+
+            int rowNum, colNum, zombiesNum;
+            char proceed;
+            bool gameSettings = true, updatedGameSettings = true;
             
+            while(gameSettings)
+            {
+                system("CLS");
+
+                cout << "REMINDER! Game Requirements\n 1. Insert odd value only to ensure the Alien spawns in the middle of the Game Board\n 2. Minimum number of row is 3 and maximum number of row is 9\n 3. Minimum number of column is 3 and maximum number of column is 21\n 4. Minimum number of zombies is 1 and maximum number of column is 9 " << endl;
+                cout << endl;
+                cout << "================================== " << endl;
+                cout << "          Game Settings            " << endl;
+                cout << "================================== " << endl;
+                cout << endl;
+                cout << "Type in a new value for row     => "; cin >> rowNum;
+                cout << endl;
+                cout << "Type in a new value for column  => "; cin >> colNum;
+                cout << endl;
+                cout << "Type in a new value for zombies => "; cin >> zombiesNum;
+                cout << endl;
+                cout << "================================== " << endl;
+
+                if (rowNum > 9 || rowNum < 3 || colNum > 21 || colNum < 3 || zombiesNum > 9 || zombiesNum < 1)
+                {
+                    cout << endl;
+                    cout << "You did not meet the game requirement! Please try again!" << endl;
+                    system("PAUSE");
+                    gameSettings = true;
+                }
+                else
+                {
+                    while (updatedGameSettings)
+                    {
+                        system("CLS");
+                        cout << "================================== " << endl;
+                        cout << "      Updated Game Settings        " << endl;
+                        cout << "================================== " << endl;
+                        cout << endl;
+                        cout << "Row     => " << rowNum << endl;
+                        cout << endl;
+                        cout << "Column  => " << colNum << endl;
+                        cout << endl;
+                        cout << "Zombies => " << zombiesNum << endl;
+                        cout << endl;
+                        cout << "================================== " << endl;
+                        cout << endl;
+
+                        cout << "Proceed? (y/n) => "; cin >> proceed;
+
+                        if (proceed == 'Y' || proceed == 'y')
+                        {
+                            ofstream file;
+                            file.open("settings.txt");
+                            file << rowNum; file << endl; file << colNum; file << endl; file << zombiesNum;
+                            file.close();
+
+                            cout << "Settings Updated! " << endl;
+                            cout << endl;
+                            system("PAUSE");
+
+                            updatedGameSettings = false;
+                            gameSettings = false;
+                            mainMenu = true;
+                        }
+                        else if (proceed == 'N' || proceed == 'n')
+                        {
+                            updatedGameSettings = false;
+                            gameSettings = false;
+                            mainMenu = true;
+                        }
+                        else
+                        {
+                            cout << "Invalid input! Please try again... " << endl;
+                            cout << endl;
+                            system("PAUSE");
+                            updatedGameSettings = true;
+                        }
+                    }
+                }
+            }
+        }
+        else if (playerChoice == 4)
+        {
+            mainMenu = false;
+
             char playerChoice;
             bool aboutGame = true;
 
@@ -1984,7 +2767,7 @@ int main()
                 }
             }
         }
-        else if (playerChoice == 4)
+        else if (playerChoice == 5)
         {
             mainMenu = false;
             cout << endl;

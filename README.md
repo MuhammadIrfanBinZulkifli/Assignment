@@ -9,11 +9,10 @@ Provide instructions on how to compile your program, especially when it is non-t
 For example:
 
 ```
-1. OPTIONAL STEP => Download and save alienvszombies.cpp, player-stats.cpp, player-stats 
-   hpp, table-making.cpp and table-making.hpp in the same folder (Do this if you are not cloning the source code from the repository. If you did clone the source code from the repository, proceed to Step 2).
+1. OPTIONAL STEP => Download and save alienvszombies.cpp, table-making.cpp and table-making.hpp in the same folder (Do this if you are not cloning the source code from the repository. If you did clone the source code from the repository, proceed to Step 2).
 
 2. Open the source code and open up a new terminal (Terminal => New Terminal)
-   g++ alienvszombies.cpp table-making.cpp player-stats.cpp -o main 
+   g++ alienvszombies.cpp table-making.cpp -o main 
    After doing so, a new file called main.exe will appear in your saved folder.
 
 3. Open up the application by double clicking the main.exe file in the saved folder.
