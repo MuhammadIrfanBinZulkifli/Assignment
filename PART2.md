@@ -2,7 +2,7 @@
 
 ## Video Demo
 
-Please provide the YouTube link to your [Video Demo](https://youtube.com).
+Please provide the YouTube link to your [Video Demo](https://youtu.be/y_xqtkH0Nrc).
 
 ## Minimum Requirements
 
@@ -22,8 +22,9 @@ List all the features completed.
 Describe the additional features that has been implemented.
 
 1. Added a simple Main Menu to help player navigate the game.
-1. Added a section that describes the summary of the game on the Main Menu called "About Game".
-2. Added a feature where the player can set random values permanently in the "Settings" on the Main Menu and save it to use the value before starting the game.
+2. Added a section that describes the summary of the game on the Main Menu called "About Game".
+3. Added a feature where the player can set random values permanently in the "Settings" on the Main Menu and save it to use the value before starting the game.
+4. Added a new game object named "d" that doubles the alien's attack value.
 
 ## Contributions
 
@@ -63,15 +64,18 @@ For example:
    printing all of it in the same screen.
 8. Implemented the feature where the alien and zombies react to the game objects.
 9. Organized the code to make the readability better. (Added comments for understanding purposes).
+10. Implemented a new game object named "d" that doubles the alien's attack value.
 
 ## Problems Encountered & Solutions
 
 Describe the problems encountered and provide the solutions / plan for the solutions.
 
-1. Problem  => Raja Fitri managed to implement the save and load feature but the load feature only loaded the 
+1. Problem  => Raja Fitri managed to implement the save and load feature but the load  
+               feature only loaded the 
                Game Board instead of letting the player continue playing it after loading it.
-   Solution => Muhammad Irfan helped in upgrading the save and load feature by turning it into arrays instead
-               of the string form which is the default form for I/O file functions.
-2. Problem  => A minor bug where the player could not return to the Main Menu after finishing the game.
-   Solution => Raja Fitri and Muhammad Irfan fixed the bug by making sure the program exits all of the while
-               loop correctly.
+   Solution => Muhammad Irfan helped in upgrading the save and load feature by turning it 
+               into arrays instead of the string form which is the default form for I/O file functions.
+2. Problem  => A minor bug where the player could not return to the Main Menu after 
+              finishing the game.
+   Solution => Raja Fitri and Muhammad Irfan fixed the bug by making sure the program 
+               exits all of the while loop correctly.
